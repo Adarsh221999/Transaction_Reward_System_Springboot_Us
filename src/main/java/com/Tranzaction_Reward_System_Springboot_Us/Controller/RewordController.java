@@ -12,17 +12,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RestController;
 import java.net.http.HttpRequest;
 
+@RestController
 public class RewordController {
+
     @Autowired
     RewordsServiceImpl rewordsService;
     @Autowired
     Reword_request rewardRequest;
 
-    @RequestMapping(value = "/getrewords/{amount}")
-     public ResponseEntity<Rewords> getRewordPoints(@PathVariable Long amount , @RequestBody HttpServletRequest request){
+
+
+    @RequestMapping(value = "/createrewordpoints")
+     public ResponseEntity<Rewords> getRewordPoints(@RequestBody HttpServletRequest request){
         Rewords rewords = null;
        try {
            Reword_request rewardsRequest = rewardRequest.mapToRewordRequest(request);
@@ -34,6 +38,8 @@ public class RewordController {
 
        }
 
-        return new ResponseEntity<>(rewords,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(rewords,HttpStatus.OK);
+
+
     }
 }

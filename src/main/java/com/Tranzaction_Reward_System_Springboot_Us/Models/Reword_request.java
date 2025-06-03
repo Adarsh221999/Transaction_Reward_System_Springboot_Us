@@ -5,9 +5,11 @@ import jakarta.persistence.Column;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.net.http.HttpRequest;
-@ComponentScan
+
+@Component
 public class Reword_request {
 
     private String  customerName;
