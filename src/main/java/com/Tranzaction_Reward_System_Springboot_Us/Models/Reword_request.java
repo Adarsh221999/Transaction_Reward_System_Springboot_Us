@@ -1,7 +1,13 @@
 package com.Tranzaction_Reward_System_Springboot_Us.Models;
 
+import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
 import jakarta.persistence.Column;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
+import org.springframework.context.annotation.ComponentScan;
 
+import java.net.http.HttpRequest;
+@ComponentScan
 public class Reword_request {
 
     private String  customerName;
@@ -37,7 +43,7 @@ public class Reword_request {
         return rewordPoints;
     }
 
-    public void setRewordPoints() {
+    public void setRewordPoints(Long rewordPoints) {
         this.rewordPoints = calculateRewordsPoints(tranzation_Amount);
     }
 
@@ -59,5 +65,26 @@ public class Reword_request {
         return calculated_Reword_Points;
     }
 
+
+    public Reword_request mapToRewordRequest(HttpServletRequest request) {
+        Reword_request reword_request = new Reword_request();
+        reword_request.setCustomerName(request.getParameter("customerName"));
+        reword_request.setTranzationId(Integer.valueOf(request.getParameter("tranzationId")));
+        reword_request.setTranzation_Amount(Double.valueOf(Integer.valueOf(request.getParameter("tranzation_Amount"))));
+
+        reword_request.setRewordPoints(calculateRewordsPoints(Double.valueOf(request.getParameter("tranzation_Amount"))));
+        return reword_request;
+    }
+
+    public Rewords mapToRewordEntity(Reword_request request){
+      Rewords reward = new Rewords();
+      reward.setRewordPoints(request.getRewordPoints());
+      reward.setTranzationId(request.getTranzationId());
+      reward.setCustomerName(request.getCustomerName());
+      reward.setTranzation_Amount(request.getTranzation_Amount());
+
+
+     return reward;
+    }
 
 }

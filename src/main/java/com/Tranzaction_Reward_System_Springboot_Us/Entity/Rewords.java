@@ -3,7 +3,7 @@ package com.Tranzaction_Reward_System_Springboot_Us.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="RewordsTable" )
+@Table(name="Rewords" )
 public class Rewords {
 
 
@@ -72,4 +72,6 @@ public class Rewords {
         this.tranzation_Amount = tranzation_Amount;
         this.rewordPoints = rewordPoints;
     }
+
+    public Rewords() {}
 }
