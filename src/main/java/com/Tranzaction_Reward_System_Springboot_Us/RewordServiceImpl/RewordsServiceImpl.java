@@ -2,7 +2,7 @@ package com.Tranzaction_Reward_System_Springboot_Us.RewordServiceImpl;
 
 import com.Tranzaction_Reward_System_Springboot_Us.RewordService.RewordOperations;
 
-public class RewardsServiceImpl implements RewordOperations {
+public class RewordsServiceImpl implements RewordOperations {
 
     @Override
     public long calculateRewordsPoints(Double amount) {

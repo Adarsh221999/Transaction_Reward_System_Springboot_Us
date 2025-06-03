@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="RewordsTable" )
-public class Rewards {
+public class Rewords {
 
 
     @Id
@@ -65,7 +65,7 @@ public class Rewards {
     }
 
 
-    public Rewards(Integer rewordId, String customerName, Integer tranzationId, Double tranzation_Amount, Long rewordPoints) {
+    public Rewords(Integer rewordId, String customerName, Integer tranzationId, Double tranzation_Amount, Long rewordPoints) {
         this.rewordId = rewordId;
         this.customerName = customerName;
         this.tranzationId = tranzationId;
