@@ -11,11 +11,6 @@ import jakarta.validation.constraints.NotNull;
 @Table(name="Rewords" )
 public class Rewords {
 
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Integer rewordId;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tranzationId;
@@ -42,31 +37,29 @@ public class Rewords {
         this.customerId = customerId;
     }
 
-//    public Integer getRewordId() {
-//        return rewordId;
-//    }
-//
-//    public void setRewordId(Integer rewordId) {
-//        this.rewordId = rewordId;
-//    }
 
     public String getCustomerName() {
+
         return customerName;
     }
 
     public void setCustomerName(String customerName) {
+
         this.customerName = customerName;
     }
 
     public Integer getTranzationId() {
+
         return tranzationId;
     }
 
     public void setTranzationId(Integer tranzationId) {
+
         this.tranzationId = tranzationId;
     }
 
     public Double getTranzation_Amount() {
+
         return tranzationAmount;
     }
 
@@ -75,10 +68,12 @@ public class Rewords {
     }
 
     public Long getRewordPoints() {
+
         return rewordPoints;
     }
 
     public void setRewordPoints(Long rewordPoints) {
+
         this.rewordPoints = rewordPoints;
     }
 
