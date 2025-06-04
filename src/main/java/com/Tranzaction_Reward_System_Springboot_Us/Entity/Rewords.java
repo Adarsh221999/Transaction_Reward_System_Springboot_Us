@@ -1,36 +1,54 @@
 package com.Tranzaction_Reward_System_Springboot_Us.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name="Rewords" )
 public class Rewords {
 
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Integer rewordId;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer rewordId;
-
-    @Column
-    private String  customerName;
-
-    @Column
     private Integer tranzationId;
 
     @Column
-    private Double tranzation_Amount;
+    @NotNull
+    private String  customerName;
+
+    @Column
+    @NotNull
+    private Double tranzationAmount;
 
     @Column
     private Long rewordPoints;
 
+    @Column(nullable = true , unique = false)
+    private Long customerId;
 
-    public Integer getRewordId() {
-        return rewordId;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setRewordId(Integer rewordId) {
-        this.rewordId = rewordId;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
+
+//    public Integer getRewordId() {
+//        return rewordId;
+//    }
+//
+//    public void setRewordId(Integer rewordId) {
+//        this.rewordId = rewordId;
+//    }
 
     public String getCustomerName() {
         return customerName;
@@ -49,11 +67,11 @@ public class Rewords {
     }
 
     public Double getTranzation_Amount() {
-        return tranzation_Amount;
+        return tranzationAmount;
     }
 
     public void setTranzation_Amount(Double tranzation_Amount) {
-        this.tranzation_Amount = tranzation_Amount;
+        this.tranzationAmount = tranzation_Amount;
     }
 
     public Long getRewordPoints() {
@@ -64,14 +82,16 @@ public class Rewords {
         this.rewordPoints = rewordPoints;
     }
 
-
-    public Rewords(Integer rewordId, String customerName, Integer tranzationId, Double tranzation_Amount, Long rewordPoints) {
-        this.rewordId = rewordId;
+    public Rewords(Integer rewordId, String customerName, Integer tranzationId, Double tranzation_Amount, Long rewordPoints,Long customerId) {
+       // this.rewordId = rewordId;
+        this.customerId=customerId;
         this.customerName = customerName;
         this.tranzationId = tranzationId;
-        this.tranzation_Amount = tranzation_Amount;
+        this.tranzationAmount = tranzation_Amount;
         this.rewordPoints = rewordPoints;
     }
 
     public Rewords() {}
+
+
 }

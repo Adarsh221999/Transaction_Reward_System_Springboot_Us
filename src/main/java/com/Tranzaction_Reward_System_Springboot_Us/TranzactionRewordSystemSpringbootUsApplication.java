@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
-@ComponentScan(basePackages = "TranzactionRewordSystemSpringbootUs")
+
+@SpringBootApplication(scanBasePackages = "com.Tranzaction_Reward_System_Springboot_Us")
 public class TranzactionRewordSystemSpringbootUsApplication {
 
 	public static void main(String[] args) {
