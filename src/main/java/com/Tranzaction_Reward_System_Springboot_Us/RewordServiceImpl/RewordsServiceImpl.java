@@ -1,24 +1,46 @@
 package com.Tranzaction_Reward_System_Springboot_Us.RewordServiceImpl;
 
 import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
-//import com.Tranzaction_Reward_System_Springboot_Us.Models.Reword_request;
+import com.Tranzaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
+import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
 import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewardsRepo;
 import com.Tranzaction_Reward_System_Springboot_Us.RewordService.RewordOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.LongSummaryStatistics;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Service
 public class RewordsServiceImpl implements RewordOperations {
+
+
 
     @Autowired
     private RewardsRepo repo;
 
+    @Override
+    public List<Rewords> findByCustomerId(Long CustomerId) {
+        return repo.findByCustomerId(CustomerId);
+    }
+
+
+
     public Rewords addRewordPoints(Rewords rewords) {
         Rewords savedReword=null;
         try {
-            rewords.setRewordPoints(calculateRewordsPoints(rewords.getTranzation_Amount()));
+            rewords.setRewordPoints(calculateRewordsPoints(rewords.getTranzationAmount()));
+            rewords.setDate(LocalDate.now());
             System.out.print(rewords.toString());
-            savedReword = repo.save(rewords);
+            savedReword=repo.save(rewords);
+
         } catch (Exception e) {
             System.out.println(e.getCause());
         }
@@ -38,6 +60,71 @@ public class RewordsServiceImpl implements RewordOperations {
         }
         return getRewordsById;
     }
+/*
+    @Override
+    public Rewords getRewordPointsByMonth(Long customerId) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+//        List<Rewords> rewordsOfUser = repo.findrewordByCustomerId(Long.valueOf(customerId));
+//
+//
+//       if (rewordsOfUser.isEmpty()){
+//           throw new CustomerNotFoundException("Customer Don't Have Any Records");
+//       }
+//
+//
+//       Long total_Points= 0L;
+//       Map<String,Long> monthlyRewards = new HashMap<>();
+//       for (Rewords r: rewordsOfUser ){
+//           Long id =r.getDate();
+//           Long rewordpoints = r.getRewordPoints();
+//
+//           monthlyRewards.put(, rewordpoints);
+//
+//
+//       }
+//
+//
+        return null;
+    }
+*/
+
+
+
+    @Override
+    public RewordSummeryByCustomer findRewordSummeryMonthlyByCustomerId(Long customerId) {
+        RewordSummeryByCustomer summery = new RewordSummeryByCustomer();
+        List<Rewords> allrewords=null;
+        try
+        {
+
+          Long totalPoints= 0L;
+
+          try {
+               allrewords = repo.findByCustomerId(customerId);
+          }
+          catch (CustomerNotFoundException e){
+              System.out.println(e.getMessage());
+          }
+          if (allrewords.size()==0){throw  new CustomerNotFoundException("No Customer with the id "+customerId);}
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+            totalPoints=allrewords.stream().mapToLong(points->points.getRewordPoints()).sum();
+            summery.setTotalSumOfAllRewards(totalPoints);
+            Map<String, Integer>RewordsByMonth = allrewords.stream().collect(Collectors.groupingBy(rewords->rewords.getDate().format(formatter),Collectors.summingInt(s-> Math.toIntExact(s.getRewordPoints()))));
+
+            summery.setCustomerId(repo.findByCustomerId(customerId).get(0).getCustomerId());
+            summery.setCustomerName(repo.findByCustomerId(customerId).get(0).getCustomerName());
+            summery.setRewordPoints(RewordsByMonth);
+            return summery;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
+
 
     private static Long calculateRewordsPoints(Double amount) {
         long calculated_Reword_Points = 0;

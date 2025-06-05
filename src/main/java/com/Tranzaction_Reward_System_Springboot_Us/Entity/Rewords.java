@@ -1,10 +1,15 @@
 package com.Tranzaction_Reward_System_Springboot_Us.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Objects;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -14,6 +19,10 @@ public class Rewords {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tranzationId;
+
+    @Column
+    private LocalDate date;
+
 
     @Column
     @NotNull
@@ -26,8 +35,48 @@ public class Rewords {
     @Column
     private Long rewordPoints;
 
-    @Column(nullable = true , unique = false)
+    @Column(nullable = false , unique = false)
     private Long customerId;
+
+    public Integer getTranzationId() {
+        return tranzationId;
+    }
+
+    public void setTranzationId(Integer tranzationId) {
+        this.tranzationId = tranzationId;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public Double getTranzationAmount() {
+        return tranzationAmount;
+    }
+
+    public void setTranzationAmount(Double tranzationAmount) {
+        this.tranzationAmount = tranzationAmount;
+    }
+
+    public Long getRewordPoints() {
+        return rewordPoints;
+    }
+
+    public void setRewordPoints(Long rewordPoints) {
+        this.rewordPoints = rewordPoints;
+    }
 
     public Long getCustomerId() {
         return customerId;
@@ -37,56 +86,29 @@ public class Rewords {
         this.customerId = customerId;
     }
 
-
-    public String getCustomerName() {
-
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-
-        this.customerName = customerName;
-    }
-
-    public Integer getTranzationId() {
-
-        return tranzationId;
-    }
-
-    public void setTranzationId(Integer tranzationId) {
-
-        this.tranzationId = tranzationId;
-    }
-
-    public Double getTranzation_Amount() {
-
-        return tranzationAmount;
-    }
-
-    public void setTranzation_Amount(Double tranzation_Amount) {
-        this.tranzationAmount = tranzation_Amount;
-    }
-
-    public Long getRewordPoints() {
-
-        return rewordPoints;
-    }
-
-    public void setRewordPoints(Long rewordPoints) {
-
-        this.rewordPoints = rewordPoints;
-    }
-
-    public Rewords(Integer rewordId, String customerName, Integer tranzationId, Double tranzation_Amount, Long rewordPoints,Long customerId) {
-       // this.rewordId = rewordId;
-        this.customerId=customerId;
-        this.customerName = customerName;
-        this.tranzationId = tranzationId;
-        this.tranzationAmount = tranzation_Amount;
-        this.rewordPoints = rewordPoints;
-    }
-
     public Rewords() {}
 
+    @Override
+    public String toString() {
+        return "Rewords{" +
+                "tranzationId=" + tranzationId +
+                ", date=" + date +
+                ", customerName='" + customerName + '\'' +
+                ", tranzationAmount=" + tranzationAmount +
+                ", rewordPoints=" + rewordPoints +
+                ", customerId=" + customerId +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Rewords rewords = (Rewords) o;
+        return Objects.equals(tranzationId, rewords.tranzationId) && Objects.equals(date, rewords.date) && Objects.equals(customerName, rewords.customerName) && Objects.equals(tranzationAmount, rewords.tranzationAmount) && Objects.equals(rewordPoints, rewords.rewordPoints) && Objects.equals(customerId, rewords.customerId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tranzationId, date, customerName, tranzationAmount, rewordPoints, customerId);
+    }
 }
