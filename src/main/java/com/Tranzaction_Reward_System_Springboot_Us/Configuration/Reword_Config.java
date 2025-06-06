@@ -9,9 +9,9 @@
 //
 //    @Bean
 //    public Reword_request getRewordRequest(){
-//        return new Reword_request();
-//    }
-//
-//}
+//        return new Reword_request()
+
+
+
 
  

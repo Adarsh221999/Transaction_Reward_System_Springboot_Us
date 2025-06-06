@@ -31,7 +31,7 @@ public class RewordController {
             System.out.print(e);
 
         }
-        return new ResponseEntity<>(rewords,HttpStatus.OK);
+        return new ResponseEntity<>(rewords,HttpStatus.BAD_REQUEST);
     }
 
 
@@ -46,7 +46,7 @@ public class RewordController {
             System.out.print(e);
 
         }
-        return new ResponseEntity<>(rewords,HttpStatus.OK);
+        return new ResponseEntity<>(rewords,HttpStatus.NOT_FOUND);
     }
 
 
@@ -62,11 +62,11 @@ public class RewordController {
             System.out.print(e);
 
         }
-        return new ResponseEntity<>(rewordsList,HttpStatus.OK);
+        return new ResponseEntity<>(rewordsList,HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
-    public ResponseEntity<RewordSummeryByCustomer> getRewordPointsSummery(@Valid @PathVariable Long CustomerId){
+    public ResponseEntity<?> getRewordPointsSummery(@Valid @PathVariable Long CustomerId){
 
          RewordSummeryByCustomer summery=null;
 

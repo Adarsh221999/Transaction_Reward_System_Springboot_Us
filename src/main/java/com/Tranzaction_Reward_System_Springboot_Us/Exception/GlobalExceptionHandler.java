@@ -23,4 +23,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleGenericException(Exception ex) {
         return new ResponseEntity<>("An unexpected error occurred: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(TransactionFailed.class)
+    public ResponseEntity<String > handleCustomerNotFound(TransactionFailed ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_IMPLEMENTED);
+    }
 }
