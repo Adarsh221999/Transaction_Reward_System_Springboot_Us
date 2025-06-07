@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RewardsRepo extends JpaRepository<Rewords,Integer> {
+public interface RewordsRepo extends JpaRepository<Rewords,Integer> {
 
     List<Rewords> findByCustomerId(Long CustomerId);
 

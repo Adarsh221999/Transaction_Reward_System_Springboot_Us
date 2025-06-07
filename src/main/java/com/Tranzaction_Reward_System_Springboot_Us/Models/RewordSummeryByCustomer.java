@@ -10,8 +10,8 @@ import java.util.Objects;
 public class RewordSummeryByCustomer {
 
     private String  customerName;
-    private Map<String, Integer> rewordPoints;
     private Long customerId;
+    private Map<String, Integer> rewordPoints;
     private Long totalSumOfAllRewards;
 
 

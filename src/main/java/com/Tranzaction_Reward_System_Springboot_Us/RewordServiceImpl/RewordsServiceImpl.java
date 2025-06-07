@@ -3,7 +3,8 @@ package com.Tranzaction_Reward_System_Springboot_Us.RewordServiceImpl;
 import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
 import com.Tranzaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
 import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
-import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewardsRepo;
+import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewordsRepo;
+import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewordsRepo;
 import com.Tranzaction_Reward_System_Springboot_Us.RewordService.RewordOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,17 +22,16 @@ import java.util.stream.Stream;
 @Service
 public class RewordsServiceImpl implements RewordOperations {
 
-
-
     @Autowired
-    private RewardsRepo repo;
+    private RewordsRepo repo;
+
+    public RewordsServiceImpl(RewordsRepo rewordsRepo) {
+    }
 
     @Override
     public List<Rewords> findByCustomerId(Long CustomerId) {
         return repo.findByCustomerId(CustomerId);
     }
-
-
 
     public Rewords addRewordPoints(Rewords rewords) {
         Rewords savedReword=null;
@@ -47,7 +47,6 @@ public class RewordsServiceImpl implements RewordOperations {
         return savedReword;
     }
 
-
     @Override
     public Rewords getRewordPoints(Integer rewordId) {
         Rewords getRewordsById=null;
@@ -60,33 +59,6 @@ public class RewordsServiceImpl implements RewordOperations {
         }
         return getRewordsById;
     }
-/*
-    @Override
-    public Rewords getRewordPointsByMonth(Long customerId) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-//        List<Rewords> rewordsOfUser = repo.findrewordByCustomerId(Long.valueOf(customerId));
-//
-//
-//       if (rewordsOfUser.isEmpty()){
-//           throw new CustomerNotFoundException("Customer Don't Have Any Records");
-//       }
-//
-//
-//       Long total_Points= 0L;
-//       Map<String,Long> monthlyRewards = new HashMap<>();
-//       for (Rewords r: rewordsOfUser ){
-//           Long id =r.getDate();
-//           Long rewordpoints = r.getRewordPoints();
-//
-//           monthlyRewards.put(, rewordpoints);
-//
-//
-//       }
-//
-//
-        return null;
-    }
-*/
 
 
 
@@ -121,10 +93,6 @@ public class RewordsServiceImpl implements RewordOperations {
         }
 
     }
-
-
-
-
 
     private static Long calculateRewordsPoints(Double amount) {
         long calculated_Reword_Points = 0;
