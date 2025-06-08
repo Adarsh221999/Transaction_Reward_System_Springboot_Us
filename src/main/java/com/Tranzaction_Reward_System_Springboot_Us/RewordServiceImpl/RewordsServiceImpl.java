@@ -6,6 +6,8 @@ import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustome
 import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewordsRepo;
 import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewordsRepo;
 import com.Tranzaction_Reward_System_Springboot_Us.RewordService.RewordOperations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ public class RewordsServiceImpl implements RewordOperations {
     @Autowired
     private RewordsRepo repo;
 
+    private static Logger loggerRewordService = LoggerFactory.getLogger(RewordsServiceImpl.class);
+
     public RewordsServiceImpl(RewordsRepo rewordsRepo) {
     }
 
@@ -36,12 +40,15 @@ public class RewordsServiceImpl implements RewordOperations {
     public Rewords addRewordPoints(Rewords rewords) {
         Rewords savedReword=null;
         try {
+            loggerRewordService.info("Adding reword at service level "+ rewords);
             rewords.setRewordPoints(calculateRewordsPoints(rewords.getTranzationAmount()));
             rewords.setDate(LocalDate.now());
             System.out.print(rewords.toString());
             savedReword=repo.save(rewords);
+            loggerRewordService.info("Adding reword at service level Completed"+ rewords);
 
         } catch (Exception e) {
+            loggerRewordService.warn("Exception While Adding reword at service level "+ rewords);
             System.out.println(e.getCause());
         }
         return savedReword;
@@ -51,10 +58,14 @@ public class RewordsServiceImpl implements RewordOperations {
     public Rewords getRewordPoints(Integer rewordId) {
         Rewords getRewordsById=null;
         try {
+            loggerRewordService.info("Getting rewords by Id "+ rewordId);
             getRewordsById= repo.getById(rewordId);
+            loggerRewordService.info("Getting rewords by Id "+ rewordId+ "Completed");
+
             return  getRewordsById;
         }
         catch (Exception e ){
+            loggerRewordService.info("Exception While Getting rewords by Id "+ rewordId);
             System.out.println(e.getCause());
         }
         return getRewordsById;
@@ -68,8 +79,8 @@ public class RewordsServiceImpl implements RewordOperations {
         List<Rewords> allrewords=null;
         try
         {
-
-          Long totalPoints= 0L;
+            loggerRewordService.info("Getting rewords by CustomerId By Month And Total  "+ customerId);
+            Long totalPoints= 0L;
 
           try {
                allrewords = repo.findByCustomerId(customerId);
@@ -86,9 +97,12 @@ public class RewordsServiceImpl implements RewordOperations {
             summery.setCustomerId(repo.findByCustomerId(customerId).get(0).getCustomerId());
             summery.setCustomerName(repo.findByCustomerId(customerId).get(0).getCustomerName());
             summery.setRewordPoints(RewordsByMonth);
+
+            loggerRewordService.info("Getting rewords by CustomerId By Month And Total  "+ customerId+"Completed");
             return summery;
 
         } catch (Exception e) {
+            loggerRewordService.warn("Exception while Getting rewords by CustomerId By Month And Total  "+ customerId);
             throw new RuntimeException(e);
         }
 
@@ -97,6 +111,7 @@ public class RewordsServiceImpl implements RewordOperations {
     private static Long calculateRewordsPoints(Double amount) {
         long calculated_Reword_Points = 0;
         try {
+            loggerRewordService.info("Getting rewords Calculated By Amount "+ amount + "Started");
             long tranzation_amount = Math.round(amount);
             if (tranzation_amount > 100) {
                 calculated_Reword_Points += (tranzation_amount - 100) * 2 + (50 * 1);
@@ -105,10 +120,12 @@ public class RewordsServiceImpl implements RewordOperations {
             } else {
                 calculated_Reword_Points = 0;
             }
+            loggerRewordService.info("Getting rewords Calculated By Amount "+ amount + "Completed");
 
         }
         catch(Exception e){
-             System.out.print(e);
+            loggerRewordService.warn("Exception caught rewords Calculated By Amount "+ amount + "Started");
+            System.out.print(e);
         }
 
         return calculated_Reword_Points;

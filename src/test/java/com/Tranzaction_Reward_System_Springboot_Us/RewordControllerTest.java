@@ -13,14 +13,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
-
 import java.time.LocalDate;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
-
 
 
 @Import(MockServiceConfig.class)
@@ -53,18 +49,22 @@ public class RewordControllerTest {
             response.setTranzationId(8);
             response.setDate(LocalDate.of(2025,06,06));
 
-            Mockito.when(rewordsService.addRewordPoints(Mockito.mock(Rewords.class))).thenReturn(response);
 
+            Mockito.when(rewordsService.addRewordPoints(Mockito.any (Rewords.class))).thenReturn(response);
 
             mockMvc.perform(post("/rewords/addReword")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(request)))
-                    .andExpect(status().isOk());;
-//                    .andExpect((ResultMatcher)jsonPath("$.customerId").value(123L))
-//                   .andExpect((ResultMatcher)jsonPath("$.rewordPoints").value(50))
-//                    .andExpect((ResultMatcher)jsonPath("$.tranzationAmount").value(100.00));
-    }
-
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.customerId").value(123))
+                    .andExpect(jsonPath("$.rewordPoints").value(50))
+                    .andExpect(jsonPath("$.tranzationAmount").value(100.00))
+                    .andExpect(jsonPath("$.tranzationId").value(8))
+                    .andExpect(jsonPath("$.date").value("2025-06-06"));
+           }
 }
+
+
+
 
 
