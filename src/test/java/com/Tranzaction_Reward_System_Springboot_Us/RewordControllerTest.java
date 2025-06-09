@@ -5,21 +5,16 @@ import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustome
 import com.Tranzaction_Reward_System_Springboot_Us.RewordServiceImpl.RewordsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +23,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-//@ExtendWith(MockitoExtension.class)
 class RewordControllerTest {
 
     @Mock
@@ -70,7 +64,7 @@ class RewordControllerTest {
                 .andExpect(jsonPath("$.rewordPoints").value(50))
                 .andExpect(jsonPath("$.tranzationAmount").value(100.00))
                 .andExpect(jsonPath("$.tranzationId").value(8));
-               // .andExpect(jsonPath("$.date").value(LocalDate.of(2025,6,6)));
+              //.andExpect(jsonPath("$.date").value(LocalDate.of(2025,6,6)));
 
     }
 
@@ -107,7 +101,8 @@ class RewordControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customerName").value("Adarsh"))
                 .andExpect(jsonPath("$.customerId").value(10))
-                .andExpect(jsonPath("$.rewordPoints").value(rewordsByMonthResponce));
+                .andExpect(jsonPath("$.rewordPoints").value(rewordsByMonthResponce))
+                .andExpect(jsonPath("$.totalSumOfAllRewards").value(30550L));
 
 
     }
