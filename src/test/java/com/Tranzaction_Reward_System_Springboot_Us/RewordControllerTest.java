@@ -17,7 +17,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
 class RewordControllerTest {
 
     @Mock
@@ -51,13 +53,12 @@ class RewordControllerTest {
         request.setTranzationAmount(100.00);
 
         Rewords response = new Rewords();
-         LocalDate.of(2025,6,6);
         response.setCustomerName("Adarsh");
         response.setCustomerId(123L);
         response.setTranzationAmount(100.00);
         response.setRewordPoints(50L);
         response.setTranzationId(8);
-        response.setDate(LocalDate.of(2025,6,6));
+        response.setDate((LocalDate.of(2025,6,6)));
 
         Mockito.when(rewordsService.addRewordPoints(Mockito.any(Rewords.class))).thenReturn(response);
 
@@ -69,7 +70,7 @@ class RewordControllerTest {
                 .andExpect(jsonPath("$.rewordPoints").value(50))
                 .andExpect(jsonPath("$.tranzationAmount").value(100.00))
                 .andExpect(jsonPath("$.tranzationId").value(8));
-                //.andExpect(jsonPath("$.date").value(Arrays.asList(2025,06,06)));
+               // .andExpect(jsonPath("$.date").value(LocalDate.of(2025,6,6)));
 
     }
 
@@ -97,9 +98,6 @@ class RewordControllerTest {
         rewordsByMonth.put("2025-06",19850);
         rewordsByMonth.put("2025-08",9850);
         response.setRewordPoints(rewordsByMonthResponce);
-
-
-       // Mockito.when(rewordsService.findRewordSummeryMonthlyByCustomerId(Mockito.any(RewordSummeryByCustomer.class))).thenReturn(response);
 
         Mockito.when(rewordsService.findRewordSummeryMonthlyByCustomerId(Mockito.anyLong())).thenReturn(response);
 

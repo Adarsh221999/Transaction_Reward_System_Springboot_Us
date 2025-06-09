@@ -4,22 +4,17 @@ import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
 import com.Tranzaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
 import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
 import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewordsRepo;
-import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewordsRepo;
 import com.Tranzaction_Reward_System_Springboot_Us.RewordService.RewordOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.LongSummaryStatistics;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class RewordsServiceImpl implements RewordOperations {
@@ -27,7 +22,7 @@ public class RewordsServiceImpl implements RewordOperations {
     @Autowired
     private RewordsRepo repo;
 
-    private static Logger loggerRewordService = LoggerFactory.getLogger(RewordsServiceImpl.class);
+    private static final Logger loggerRewordService = LoggerFactory.getLogger(RewordsServiceImpl.class);
 
     public RewordsServiceImpl(RewordsRepo rewordsRepo) {
     }
@@ -49,7 +44,7 @@ public class RewordsServiceImpl implements RewordOperations {
 
         } catch (Exception e) {
             loggerRewordService.warn("Exception While Adding reword at service level "+ rewords);
-            System.out.println(e.getCause());
+            System.out.print(e.getCause());
         }
         return savedReword;
     }
@@ -80,7 +75,7 @@ public class RewordsServiceImpl implements RewordOperations {
         try
         {
             loggerRewordService.info("Getting rewords by CustomerId By Month And Total  "+ customerId);
-            Long totalPoints= 0L;
+            long totalPoints= 0L;
 
           try {
                allrewords = repo.findByCustomerId(customerId);
@@ -88,7 +83,8 @@ public class RewordsServiceImpl implements RewordOperations {
           catch (CustomerNotFoundException e){
               System.out.println(e.getMessage());
           }
-          if (allrewords.size()==0){throw  new CustomerNotFoundException("No Customer with the id "+customerId);}
+            assert allrewords != null;
+            if (allrewords.isEmpty()){throw  new CustomerNotFoundException("No Customer with the id "+customerId);}
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
             totalPoints=allrewords.stream().mapToLong(points->points.getRewordPoints()).sum();
             summery.setTotalSumOfAllRewards(totalPoints);
@@ -114,11 +110,11 @@ public class RewordsServiceImpl implements RewordOperations {
             loggerRewordService.info("Getting rewords Calculated By Amount "+ amount + "Started");
             long tranzation_amount = Math.round(amount);
             if (tranzation_amount > 100) {
-                calculated_Reword_Points += (tranzation_amount - 100) * 2 + (50 * 1);
+                calculated_Reword_Points += (tranzation_amount - 100) * 2 + (50);
             } else if (tranzation_amount > 50 && tranzation_amount < 100) {
-                calculated_Reword_Points = (tranzation_amount - 50) * 1;
+                calculated_Reword_Points = (tranzation_amount - 50);
             } else {
-                calculated_Reword_Points = 0;
+               return calculated_Reword_Points;
             }
             loggerRewordService.info("Getting rewords Calculated By Amount "+ amount + "Completed");
 
