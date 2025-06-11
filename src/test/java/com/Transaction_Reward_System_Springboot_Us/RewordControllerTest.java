@@ -56,7 +56,7 @@ class RewordControllerTest {
 
         Mockito.when(rewordsService.addRewordPoints(Mockito.any(Rewords.class))).thenReturn(response);
 
-        mockMvc.perform(post("/rewords/addReword")
+        mockMvc.perform(post("/reword/addReword")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
@@ -95,7 +95,7 @@ class RewordControllerTest {
 
         Mockito.when(rewordsService.findRewordSummeryMonthlyByCustomerId(Mockito.anyLong())).thenReturn(response);
 
-        mockMvc.perform(get("/rewords/getRewordsByMonth/10")
+        mockMvc.perform(get("/reword/getRewordsByMonth/10")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())

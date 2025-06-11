@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rewords")
+@RequestMapping("/reword")
 public class RewordController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class RewordController {
     private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
 
     @PostMapping (value = "/addReword")
-    public ResponseEntity<Rewords> addReword(@Valid @RequestBody Rewords request){
+    public ResponseEntity<?> addReword(@Valid @RequestBody Rewords request){
         Rewords rewords = null;
         try {
             logger.info("Received request to add reward: {}", request);
@@ -31,17 +31,17 @@ public class RewordController {
             logger.info("Completed request to add reward: {}", request);
             return new ResponseEntity<>(rewords, HttpStatus.OK);
         }
-        catch (Exception e ){
+        catch (Exception e){
             logger.warn("Received Waring while request to add reward: {}", request);
-            System.out.print(e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 
         }
-        return new ResponseEntity<>(rewords,HttpStatus.BAD_REQUEST);
+
     }
 
 
     @GetMapping(value = "/getrewordpoints/{rewordId}")
-    public ResponseEntity<Rewords> getRewordPoints(@Valid @PathVariable Integer rewordId){
+    public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Integer rewordId){
         Rewords rewords = null;
         try {
             logger.info("Received request to get reword by tranzactionId: {}", rewordId);
@@ -49,17 +49,17 @@ public class RewordController {
             logger.info("Completed request to get reword by the Id: {}", rewordId);
             return new ResponseEntity<>(rewords, HttpStatus.OK);
         }
-        catch (Exception e ){
+        catch (Exception e){
             logger.warn("Exception request to get All reword by tranzactionId: {}", rewordId);
-            System.out.print(e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 
         }
-        return new ResponseEntity<>(rewords,HttpStatus.NOT_FOUND);
+
     }
 
 
     @GetMapping(value = "/getAllRewords/{CustomerId}")
-    public ResponseEntity<List<Rewords>> getRewordPoints(@Valid @PathVariable Long CustomerId){
+    public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Long CustomerId){
 
         List<Rewords> rewordsList=null;
         try {
@@ -69,12 +69,11 @@ public class RewordController {
 
             return new ResponseEntity<>(rewordsList, HttpStatus.OK);
         }
-        catch (Exception e ){
+        catch (Exception e){
             logger.info("Exception while request to get All reword by CustomerId: {}", CustomerId);
-            System.out.print(e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 
         }
-        return new ResponseEntity<>(rewordsList,HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
@@ -89,7 +88,7 @@ public class RewordController {
 
             return new ResponseEntity<>(summery, HttpStatus.OK);
         }
-        catch (Exception e ){
+        catch (Exception e){
             logger.warn("Exception while request to get All reword by Month CustomerId: {}", CustomerId);
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 
