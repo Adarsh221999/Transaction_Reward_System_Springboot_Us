@@ -22,6 +22,7 @@ public class RewordController {
 
     private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
 
+
     /*
     Controller endpoint for adding reword
      */
@@ -41,6 +42,9 @@ public class RewordController {
         }
 
     }
+
+
+
 
     /*
     Controller endpoint for getting reword by Reword/tranzactionId
@@ -63,6 +67,8 @@ public class RewordController {
     }
 
 
+
+
     /*
     Controller endpoint for getting reword by customer Id
     */
@@ -71,9 +77,9 @@ public class RewordController {
 
         List<Rewords> rewordsList=null;
         try {
-            logger.info("Received request to get All reword by tranzactionId: {}", CustomerId);
+            logger.info("Received request to get All reword by transactionId: {}", CustomerId);
             rewordsList = rewordsService.findByCustomerId(CustomerId);
-            logger.info("Completed request to get All reword by tranzactionId: {}", CustomerId);
+            logger.info("Completed request to get All reword by transactionId: {}", CustomerId);
 
             return new ResponseEntity<>(rewordsList, HttpStatus.OK);
         }
@@ -90,9 +96,9 @@ public class RewordController {
     Controller endpoint for getting rewordpoints summery by month.
      */
     @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
-    public ResponseEntity<?> getRewordPointsSummery(@Valid @PathVariable Long CustomerId){
+    public ResponseEntity<?> getRewordPointsSummery(@Valid @PathVariable Long CustomerId) {
 
-         RewordSummeryByCustomer summery=null;
+        RewordSummeryByCustomer summery = null;
 
         try {
             logger.info("Received request to get All reword by Month CustomerId: {}", CustomerId);
@@ -100,11 +106,37 @@ public class RewordController {
             logger.info("Completed request to get All reword by Month CustomerId: {}", CustomerId);
 
             return new ResponseEntity<>(summery, HttpStatus.OK);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             logger.warn("Exception while request to get All reword by Month CustomerId: {}", CustomerId);
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
         }
+
     }
-}
+
+
+
+
+    /*
+    Controller endpoint for getting rewordpoints summery for last 3 months.
+     */
+        @GetMapping(value = "/getThreeMonthsRewordsSummeryForAllCustomer")
+        public ResponseEntity<?> getThreeMonthsRewordsSummeryForAllCustomer() {
+
+           // RewordSummeryByCustomer summeryThreeMonths = null;
+            try {
+                logger.info("Received request to get All reword summery for three months by each customer: {}");
+                List<RewordSummeryByCustomer> threeMontsSummmery = rewordsService.getRewordSummeryForLastThreeMonth();
+                logger.info("Received request to get All reword summery for three months by each customer:{}");
+
+                return new ResponseEntity<>(threeMontsSummmery, HttpStatus.OK);
+            } catch (Exception e) {
+                logger.warn("Exception while getting all reword by customerId for three months: {}");
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+            }
+
+        }
+
+    }
+

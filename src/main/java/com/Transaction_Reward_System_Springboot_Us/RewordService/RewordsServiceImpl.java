@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -158,20 +159,23 @@ public class RewordsServiceImpl implements RewordOperations {
     /*
     Below method gives summery of rewords for Last 3 Month date range;
      */
-    private List<RewordSummeryByCustomer> getRewordSummeryForLastThreeMonth() {
-        List<RewordSummeryByCustomer> all_Customer_RewordSummery_LastThreeMonths = null;
+    public List<RewordSummeryByCustomer> getRewordSummeryForLastThreeMonth() {
+       List<RewordSummeryByCustomer> all_Customer_RewordSummery_LastThreeMonths = new ArrayList<>();;
         try {
             LocalDate EndDate = LocalDate.now();
             LocalDate StartDate = EndDate.minusMonths(3);
             List<Rewords> RewordOfLastThreeMonths = repo.findByDateBetween(StartDate,EndDate);
             for (Rewords rewords : RewordOfLastThreeMonths) {
                 RewordSummeryByCustomer rewordSummeryMonthlyByCustomerId = findRewordSummeryMonthlyByCustomerId(rewords.getCustomerId());
+                if(all_Customer_RewordSummery_LastThreeMonths.contains(rewordSummeryMonthlyByCustomerId)){
+                    continue;
+                }
                 all_Customer_RewordSummery_LastThreeMonths.add(rewordSummeryMonthlyByCustomerId);
             }
             return all_Customer_RewordSummery_LastThreeMonths;
         }
         catch(NullPointerException e ){
-            throw new NullPointerException("Getting summery by got into Null Pointer Exception");
+            throw new NullPointerException("Getting summery got into Null Pointer Exception");
         }
         catch (Exception e) {
            throw new FailedToGetRewordSummeryForLastThreeMonth("Unable to generate summery of rewords for last three months");

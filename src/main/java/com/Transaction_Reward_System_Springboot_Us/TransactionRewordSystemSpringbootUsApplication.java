@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-@SpringBootApplication(scanBasePackages = "com.Tranzaction_Reward_System_Springboot_Us")
+@SpringBootApplication(scanBasePackages = "com.Transaction_Reward_System_Springboot_Us")
 public class TransactionRewordSystemSpringbootUsApplication {
 
 	public static void main(String[] args) {
