@@ -72,9 +72,9 @@ public class RewordsServiceImpl implements RewordOperations {
     public Rewords getRewordPoints(Integer rewordId) {
         Rewords getRewordsById=null;
         try {
-            loggerRewordService.info("Getting rewords by Id "+ rewordId);
+            loggerRewordService.info("Getting rewords by Id {}", rewordId);
             getRewordsById= repo.getById(rewordId);
-            loggerRewordService.info("Getting rewords by Id "+ rewordId+ "Completed");
+            loggerRewordService.info("Getting rewords by Id {}Completed", rewordId);
 
             return  getRewordsById;
         }
@@ -169,7 +169,11 @@ public class RewordsServiceImpl implements RewordOperations {
                 all_Cutomer_RewordSummery_LastThreeMonths.add(rewordSummeryMonthlyByCustomerId);
             }
             return all_Cutomer_RewordSummery_LastThreeMonths;
-        } catch (Exception e) {
+        }
+        catch(NullPointerException e ){
+            throw new NullPointerException("Getting summery by got into Null Pointer Exception");
+        }
+        catch (Exception e) {
            throw new FailedToGetRewordSummeryForLastThreeMonth("Unable to generate summery of rewords for last three months");
         }
     }
