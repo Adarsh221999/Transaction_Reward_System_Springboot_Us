@@ -22,6 +22,10 @@ public class RewordController {
 
     private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
 
+    /*
+    Controller endpoint for adding reword
+     */
+
     @PostMapping (value = "/addReword")
     public ResponseEntity<?> addReword(@Valid @RequestBody Rewords request){
         Rewords rewords = null;
@@ -39,6 +43,9 @@ public class RewordController {
 
     }
 
+    /*
+    Controller endpoint for getting reword by Reword/tranzactionId
+     */
 
     @GetMapping(value = "/getrewordpoints/{rewordId}")
     public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Integer rewordId){
@@ -58,6 +65,9 @@ public class RewordController {
     }
 
 
+    /*
+    Controller endpoint for getting reword by customer Id
+    */
     @GetMapping(value = "/getAllRewords/{CustomerId}")
     public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Long CustomerId){
 
@@ -75,6 +85,12 @@ public class RewordController {
 
         }
     }
+
+
+
+    /*
+    Controller endpoint for getting rewordpoints summery by month.
+     */
 
     @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
     public ResponseEntity<?> getRewordPointsSummery(@Valid @PathVariable Long CustomerId){

@@ -2,6 +2,8 @@ package com.Transaction_Reward_System_Springboot_Us.RewordService;
 
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
 import com.Transaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
+import com.Transaction_Reward_System_Springboot_Us.Exception.RewordTransactionNotFound;
+import com.Transaction_Reward_System_Springboot_Us.Exception.TransactionFailed;
 import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
 import com.Transaction_Reward_System_Springboot_Us.Repository.RewordsRepo;
 import org.slf4j.Logger;
@@ -26,6 +28,9 @@ public class RewordsServiceImpl implements RewordOperations {
     public RewordsServiceImpl(RewordsRepo rewordsRepo) {
     }
 
+    /*
+    Mehtod for the calculation for the list of rewords by CustomerID.
+     */
     @Override
     public List<Rewords> findByCustomerId(Long CustomerId) {
         return repo.findByCustomerId(CustomerId);
@@ -43,11 +48,16 @@ public class RewordsServiceImpl implements RewordOperations {
 
         } catch (Exception e) {
             loggerRewordService.warn("Exception While Adding reword at service level "+ rewords);
-            System.out.print(e.getCause());
+            throw new TransactionFailed("Adding Rewords Tranzation Failed");
         }
         return savedReword;
     }
 
+
+
+    /*
+    Mehtod for the calculation for the reword points by tranzactionId/RewordId.
+     */
     @Override
     public Rewords getRewordPoints(Integer rewordId) {
         Rewords getRewordsById=null;
@@ -60,13 +70,13 @@ public class RewordsServiceImpl implements RewordOperations {
         }
         catch (Exception e ){
             loggerRewordService.info("Exception While Getting rewords by Id "+ rewordId);
-            System.out.println(e.getCause());
+            throw new RewordTransactionNotFound("No Reword Transaction Found");
         }
-        return getRewordsById;
     }
 
-
-
+    /*
+        Mehtod for the calculation for the reword Summery points by Customer ID.
+    */
     @Override
     public RewordSummeryByCustomer findRewordSummeryMonthlyByCustomerId(Long customerId) {
         RewordSummeryByCustomer summery = new RewordSummeryByCustomer();
@@ -103,6 +113,10 @@ public class RewordsServiceImpl implements RewordOperations {
 
     }
 
+    /*
+
+    Mehtod for the calculation for the reword points by tranzaction amount.
+     */
     private static Long calculateRewordsPoints(Double amount) {
         long calculated_Reword_Points = 0;
         try {
@@ -120,7 +134,7 @@ public class RewordsServiceImpl implements RewordOperations {
         }
         catch(Exception e){
             loggerRewordService.warn("Exception caught rewords Calculated By Amount "+ amount + "Started");
-            System.out.print(e);
+            throw e;
         }
 
         return calculated_Reword_Points;

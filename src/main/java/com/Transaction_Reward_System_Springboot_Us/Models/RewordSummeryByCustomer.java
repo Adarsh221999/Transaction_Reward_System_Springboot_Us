@@ -1,47 +1,21 @@
 package com.Transaction_Reward_System_Springboot_Us.Models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Map;
 import java.util.Objects;
 
+@Getter
+@Setter
 public class RewordSummeryByCustomer {
 
     private String  customerName;
     private Long customerId;
     private Map<String, Integer> rewordPoints;
+    @Setter
     private Long totalSumOfAllRewards;
 
-
-    public Long getTotalSumOfAllRewards() {
-        return totalSumOfAllRewards;
-    }
-
-    public void setTotalSumOfAllRewards(Long totalSumOfAllRewards) {
-        this.totalSumOfAllRewards = totalSumOfAllRewards;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public Map<String, Integer> getRewordPoints() {
-        return rewordPoints;
-    }
-
-    public void setRewordPoints(Map<String,Integer> rewordPoints) {
-        this.rewordPoints = rewordPoints;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
 
     public RewordSummeryByCustomer(String customerName, Map<String, Integer> rewordPoints, Long customerId) {
         this.customerName = customerName;

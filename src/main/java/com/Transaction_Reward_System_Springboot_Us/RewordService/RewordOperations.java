@@ -15,6 +15,4 @@ public interface RewordOperations {
 
     RewordSummeryByCustomer findRewordSummeryMonthlyByCustomerId(Long customerId);
 
-
-    //Rewords getRewordPointsByMonth(Long customerId);
 }

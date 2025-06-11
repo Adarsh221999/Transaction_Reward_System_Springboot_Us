@@ -9,7 +9,9 @@ import java.util.List;
 @Repository
 public interface RewordsRepo extends JpaRepository<Rewords,Integer> {
 
+      /*
+    This method finds the reword transactions by customerId
+     */
     List<Rewords> findByCustomerId(Long CustomerId);
-
 
 }
