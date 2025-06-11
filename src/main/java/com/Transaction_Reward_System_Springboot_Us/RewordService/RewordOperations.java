@@ -1,8 +1,7 @@
-package com.Tranzaction_Reward_System_Springboot_Us.RewordService;
+package com.Transaction_Reward_System_Springboot_Us.RewordService;
 
-import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
-import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
-import jakarta.validation.Valid;
+import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
+import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
 
 import java.util.List;
 

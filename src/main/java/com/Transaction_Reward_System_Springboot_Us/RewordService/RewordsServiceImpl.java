@@ -1,10 +1,9 @@
-package com.Tranzaction_Reward_System_Springboot_Us.RewordServiceImpl;
+package com.Transaction_Reward_System_Springboot_Us.RewordService;
 
-import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
-import com.Tranzaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
-import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
-import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewordsRepo;
-import com.Tranzaction_Reward_System_Springboot_Us.RewordService.RewordOperations;
+import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
+import com.Transaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
+import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
+import com.Transaction_Reward_System_Springboot_Us.Repository.RewordsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +83,7 @@ public class RewordsServiceImpl implements RewordOperations {
               System.out.println(e.getMessage());
           }
             assert allrewords != null;
-            if (allrewords.isEmpty()){throw  new CustomerNotFoundException("No Customer with the id "+customerId);}
+            if (allrewords.isEmpty()){throw new  CustomerNotFoundException("No Customer with the id "+customerId);}
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
             totalPoints=allrewords.stream().mapToLong(points->points.getRewordPoints()).sum();
             summery.setTotalSumOfAllRewards(totalPoints);

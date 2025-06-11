@@ -1,8 +1,8 @@
-package com.Tranzaction_Reward_System_Springboot_Us;
-import com.Tranzaction_Reward_System_Springboot_Us.Controller.RewordController;
-import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
-import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
-import com.Tranzaction_Reward_System_Springboot_Us.RewordServiceImpl.RewordsServiceImpl;
+package com.Transaction_Reward_System_Springboot_Us;
+import com.Transaction_Reward_System_Springboot_Us.Controller.RewordController;
+import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
+import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
+import com.Transaction_Reward_System_Springboot_Us.RewordService.RewordsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

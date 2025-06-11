@@ -1,6 +1,6 @@
-package com.Tranzaction_Reward_System_Springboot_Us.Repo;
+package com.Transaction_Reward_System_Springboot_Us.Repository;
 
-import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
+import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

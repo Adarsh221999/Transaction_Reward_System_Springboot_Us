@@ -1,9 +1,8 @@
-package com.Tranzaction_Reward_System_Springboot_Us.Controller;
+package com.Transaction_Reward_System_Springboot_Us.Controller;
 
-import com.Tranzaction_Reward_System_Springboot_Us.Entity.Rewords;
-import com.Tranzaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
-import com.Tranzaction_Reward_System_Springboot_Us.RewordServiceImpl.RewordsServiceImpl;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
+import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
+import com.Transaction_Reward_System_Springboot_Us.RewordService.RewordsServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class RewordController {
     @Autowired
     RewordsServiceImpl rewordsService;
 
-    private static Logger logger = LoggerFactory.getLogger(RewordController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
 
     @PostMapping (value = "/addReword")
     public ResponseEntity<Rewords> addReword(@Valid @RequestBody Rewords request){
@@ -79,7 +78,7 @@ public class RewordController {
     }
 
     @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
-    public ResponseEntity<RewordSummeryByCustomer> getRewordPointsSummery(@Valid @PathVariable Long CustomerId){
+    public ResponseEntity<?> getRewordPointsSummery(@Valid @PathVariable Long CustomerId){
 
          RewordSummeryByCustomer summery=null;
 
@@ -92,9 +91,8 @@ public class RewordController {
         }
         catch (Exception e ){
             logger.warn("Exception while request to get All reword by Month CustomerId: {}", CustomerId);
-            System.out.print(e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 
         }
-        return new ResponseEntity<>(summery,HttpStatus.NOT_FOUND);
     }
 }

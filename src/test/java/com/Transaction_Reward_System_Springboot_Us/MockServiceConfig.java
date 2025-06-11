@@ -1,12 +1,11 @@
-package com.Tranzaction_Reward_System_Springboot_Us;
+package com.Transaction_Reward_System_Springboot_Us;
 
 
-import com.Tranzaction_Reward_System_Springboot_Us.Repo.RewordsRepo;
-import com.Tranzaction_Reward_System_Springboot_Us.RewordServiceImpl.RewordsServiceImpl;
+import com.Transaction_Reward_System_Springboot_Us.Repository.RewordsRepo;
+import com.Transaction_Reward_System_Springboot_Us.RewordService.RewordsServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 @TestConfiguration
 public class MockServiceConfig {

@@ -1,9 +1,5 @@
-package com.Tranzaction_Reward_System_Springboot_Us.Models;
+package com.Transaction_Reward_System_Springboot_Us.Models;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotNull;
-
-import java.util.LongSummaryStatistics;
 import java.util.Map;
 import java.util.Objects;
 
