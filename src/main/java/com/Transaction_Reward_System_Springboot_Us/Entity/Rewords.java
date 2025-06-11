@@ -18,7 +18,7 @@ public class Rewords {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer transationId;
+    private Integer transactionId;
 
     @Column
     private LocalDate date;
@@ -30,7 +30,7 @@ public class Rewords {
 
     @Column
     @NotNull
-    private Double transationAmount;
+    private Double transactionAmount;
 
     @Column
     private Long rewordPoints;
@@ -43,10 +43,10 @@ public class Rewords {
     @Override
     public String toString() {
         return "Rewords{" +
-                "tranzationId=" + transationId +
+                "tranzationId=" + transactionId +
                 ", date=" + date +
                 ", customerName='" + customerName + '\'' +
-                ", transationAmount=" + transationAmount +
+                ", transactionAmount=" + transactionAmount +
                 ", rewordPoints=" + rewordPoints +
                 ", customerId=" + customerId +
                 '}';
@@ -56,11 +56,11 @@ public class Rewords {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Rewords rewords = (Rewords) o;
-        return Objects.equals(transationId, rewords.transationId) && Objects.equals(date, rewords.date) && Objects.equals(customerName, rewords.customerName) && Objects.equals(transationAmount, rewords.transationAmount) && Objects.equals(rewordPoints, rewords.rewordPoints) && Objects.equals(customerId, rewords.customerId);
+        return Objects.equals(transactionId, rewords.transactionId) && Objects.equals(date, rewords.date) && Objects.equals(customerName, rewords.customerName) && Objects.equals(transactionAmount, rewords.transactionAmount) && Objects.equals(rewordPoints, rewords.rewordPoints) && Objects.equals(customerId, rewords.customerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transationId, date, customerName, transationAmount, rewordPoints, customerId);
+        return Objects.hash(transactionId, date, customerName, transactionAmount, rewordPoints, customerId);
     }
 }

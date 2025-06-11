@@ -46,7 +46,6 @@ public class RewordController {
     /*
     Controller endpoint for getting reword by Reword/tranzactionId
      */
-
     @GetMapping(value = "/getrewordpoints/{rewordId}")
     public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Integer rewordId){
         Rewords rewords = null;
@@ -91,7 +90,6 @@ public class RewordController {
     /*
     Controller endpoint for getting rewordpoints summery by month.
      */
-
     @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
     public ResponseEntity<?> getRewordPointsSummery(@Valid @PathVariable Long CustomerId){
 
