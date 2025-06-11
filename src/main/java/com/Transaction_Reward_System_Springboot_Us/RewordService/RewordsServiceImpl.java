@@ -161,9 +161,9 @@ public class RewordsServiceImpl implements RewordOperations {
     private List<RewordSummeryByCustomer> getRewordSummeryForLastThreeMonth() {
         List<RewordSummeryByCustomer> all_Cutomer_RewordSummery_LastThreeMonths = null;
         try {
-            LocalDate StartDate = LocalDate.now();
-            LocalDate EndDate = StartDate.minusMonths(3);
-            List<Rewords> RewordOfLastThreeMonths = repo.findByDates();
+            LocalDate EndDate = LocalDate.now();
+            LocalDate StartDate = EndDate.minusMonths(3);
+            List<Rewords> RewordOfLastThreeMonths = repo.findByDateBetween(StartDate,EndDate);
             for (Rewords rewords : RewordOfLastThreeMonths) {
                 RewordSummeryByCustomer rewordSummeryMonthlyByCustomerId = findRewordSummeryMonthlyByCustomerId(rewords.getCustomerId());
                 all_Cutomer_RewordSummery_LastThreeMonths.add(rewordSummeryMonthlyByCustomerId);

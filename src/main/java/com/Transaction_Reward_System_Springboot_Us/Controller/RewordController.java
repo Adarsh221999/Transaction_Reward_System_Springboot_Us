@@ -25,7 +25,6 @@ public class RewordController {
     /*
     Controller endpoint for adding reword
      */
-
     @PostMapping (value = "/addReword")
     public ResponseEntity<?> addReword(@Valid @RequestBody Rewords request){
         Rewords rewords = null;

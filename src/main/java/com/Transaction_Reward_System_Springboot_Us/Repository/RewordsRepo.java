@@ -19,6 +19,6 @@ public interface RewordsRepo extends JpaRepository<Rewords,Integer> {
     /*
     This method finds the reword transactions by date range.
      */
-    List<Rewords>findByDates();
+    List<Rewords>findByDateBetween(LocalDate startDate,LocalDate EndDate);
 
 }
