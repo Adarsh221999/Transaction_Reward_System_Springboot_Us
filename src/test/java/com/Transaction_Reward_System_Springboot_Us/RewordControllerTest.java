@@ -32,7 +32,7 @@ class RewordControllerTest {
     private RewordController rewordController;
 
     private MockMvc mockMvc;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     void setup() {
@@ -44,14 +44,14 @@ class RewordControllerTest {
         Rewords request = new Rewords();
         request.setCustomerName("Adarsh");
         request.setCustomerId(123L);
-        request.setTranzationAmount(100.00);
+        request.setTransactionAmount(100.00);
 
         Rewords response = new Rewords();
         response.setCustomerName("Adarsh");
         response.setCustomerId(123L);
-        response.setTranzationAmount(100.00);
+        response.setTransactionAmount(100.00);
         response.setRewordPoints(50L);
-        response.setTranzationId(8);
+        response.setTransactionId(8);
         response.setDate((LocalDate.of(2025,6,6)));
 
         Mockito.when(rewordsService.addRewordPoints(Mockito.any(Rewords.class))).thenReturn(response);
@@ -62,8 +62,8 @@ class RewordControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customerId").value(123))
                 .andExpect(jsonPath("$.rewordPoints").value(50))
-                .andExpect(jsonPath("$.tranzationAmount").value(100.00))
-                .andExpect(jsonPath("$.tranzationId").value(8));
+                .andExpect(jsonPath("$.transactionAmount").value(100.00))
+                .andExpect(jsonPath("$.transactionId").value(8));
               //.andExpect(jsonPath("$.date").value(LocalDate.of(2025,6,6)));
 
     }

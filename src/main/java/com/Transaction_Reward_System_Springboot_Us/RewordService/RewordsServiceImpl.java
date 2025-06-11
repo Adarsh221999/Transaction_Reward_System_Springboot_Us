@@ -2,6 +2,7 @@ package com.Transaction_Reward_System_Springboot_Us.RewordService;
 
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
 import com.Transaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
+import com.Transaction_Reward_System_Springboot_Us.Exception.FailedToGetRewordSummeryForLastThreeMonth;
 import com.Transaction_Reward_System_Springboot_Us.Exception.RewordTransactionNotFound;
 import com.Transaction_Reward_System_Springboot_Us.Exception.TransactionFailed;
 import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
@@ -153,4 +154,23 @@ public class RewordsServiceImpl implements RewordOperations {
         return calculated_Reword_Points;
     }
 
+
+    /*
+    Below method gives summery of rewords for Last 3 Month date range;
+     */
+    private List<RewordSummeryByCustomer> getRewordSummeryForLastThreeMonth() {
+        List<RewordSummeryByCustomer> all_Cutomer_RewordSummery_LastThreeMonths = null;
+        try {
+            LocalDate StartDate = LocalDate.now();
+            LocalDate EndDate = StartDate.minusMonths(3);
+            List<Rewords> RewordOfLastThreeMonths = repo.findByDates();
+            for (Rewords rewords : RewordOfLastThreeMonths) {
+                RewordSummeryByCustomer rewordSummeryMonthlyByCustomerId = findRewordSummeryMonthlyByCustomerId(rewords.getCustomerId());
+                all_Cutomer_RewordSummery_LastThreeMonths.add(rewordSummeryMonthlyByCustomerId);
+            }
+            return all_Cutomer_RewordSummery_LastThreeMonths;
+        } catch (Exception e) {
+           throw new FailedToGetRewordSummeryForLastThreeMonth("Unable to generate summery of rewords for last three months");
+        }
+    }
 }
