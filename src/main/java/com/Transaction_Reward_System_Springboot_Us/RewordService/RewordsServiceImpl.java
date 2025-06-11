@@ -71,9 +71,9 @@ public class RewordsServiceImpl implements RewordOperations {
     public Rewords getRewordPoints(Integer rewordId) {
         Rewords getRewordsById=null;
         try {
-            loggerRewordService.info("Getting rewords by Id "+ rewordId);
+            loggerRewordService.info("Getting rewords by Id {}", rewordId);
             getRewordsById= repo.getById(rewordId);
-            loggerRewordService.info("Getting rewords by Id "+ rewordId+ "Completed");
+            loggerRewordService.info("Getting rewords by Id {}Completed", rewordId);
 
             return  getRewordsById;
         }
@@ -142,11 +142,11 @@ public class RewordsServiceImpl implements RewordOperations {
             } else {
                return calculated_Reword_Points;
             }
-            loggerRewordService.info("Getting rewords Calculated By Amount "+ amount + "Completed");
+            loggerRewordService.info("Getting rewords Calculated By Amount {}Completed", amount);
 
         }
         catch(Exception e){
-            loggerRewordService.warn("Exception caught rewords Calculated By Amount "+ amount + "Started");
+            loggerRewordService.warn("Exception caught rewords Calculated By Amount {}Started", amount);
             throw e;
         }
 
