@@ -159,16 +159,16 @@ public class RewordsServiceImpl implements RewordOperations {
     Below method gives summery of rewords for Last 3 Month date range;
      */
     private List<RewordSummeryByCustomer> getRewordSummeryForLastThreeMonth() {
-        List<RewordSummeryByCustomer> all_Cutomer_RewordSummery_LastThreeMonths = null;
+        List<RewordSummeryByCustomer> all_Customer_RewordSummery_LastThreeMonths = null;
         try {
             LocalDate EndDate = LocalDate.now();
             LocalDate StartDate = EndDate.minusMonths(3);
             List<Rewords> RewordOfLastThreeMonths = repo.findByDateBetween(StartDate,EndDate);
             for (Rewords rewords : RewordOfLastThreeMonths) {
                 RewordSummeryByCustomer rewordSummeryMonthlyByCustomerId = findRewordSummeryMonthlyByCustomerId(rewords.getCustomerId());
-                all_Cutomer_RewordSummery_LastThreeMonths.add(rewordSummeryMonthlyByCustomerId);
+                all_Customer_RewordSummery_LastThreeMonths.add(rewordSummeryMonthlyByCustomerId);
             }
-            return all_Cutomer_RewordSummery_LastThreeMonths;
+            return all_Customer_RewordSummery_LastThreeMonths;
         }
         catch(NullPointerException e ){
             throw new NullPointerException("Getting summery by got into Null Pointer Exception");
