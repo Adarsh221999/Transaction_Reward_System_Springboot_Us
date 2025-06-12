@@ -1,4 +1,4 @@
-package com.Transaction_Reward_System_Springboot_Us.RewordService;
+package com.Transaction_Reward_System_Springboot_Us.Service;
 
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
 import com.Transaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class RewordsServiceImpl implements RewordOperations {
 
+    //Autowiring the Rewords repository.
     @Autowired
     private RewordsRepo repo;
 
@@ -35,7 +36,7 @@ public class RewordsServiceImpl implements RewordOperations {
 
 
     /*
-    Mehtod for the calculation for the list of rewords by CustomerID.
+    Method for the calculation for the list of rewords by CustomerID.
      */
     @Override
     public List<Rewords> findByCustomerId(Long CustomerId) {
@@ -67,7 +68,7 @@ public class RewordsServiceImpl implements RewordOperations {
 
 
     /*
-    Mehtod for the calculation for the reword points by tranzactionId/RewordId.
+    Method for the calculation for the reword points by transactionId/RewordId.
      */
     @Override
     public Rewords getRewordPoints(Integer rewordId) {
@@ -88,7 +89,7 @@ public class RewordsServiceImpl implements RewordOperations {
 
 
     /*
-        Mehtod for the calculation for the reword Summery points by Customer ID.
+     Method for the calculation for the reword Summery points by Customer ID.
     */
     @Override
     public RewordSummeryByCustomer findRewordSummeryMonthlyByCustomerId(Long customerId) {
@@ -105,8 +106,13 @@ public class RewordsServiceImpl implements RewordOperations {
           catch (CustomerNotFoundException e){
               System.out.println(e.getMessage());
           }
+
             assert allrewords != null;
-            if (allrewords.isEmpty()){throw new  CustomerNotFoundException("No Customer with the id "+customerId);}
+            if (allrewords.isEmpty())
+            {
+                throw new  CustomerNotFoundException("No Customer with the id "+customerId);
+            }
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
             totalPoints=allrewords.stream().mapToLong(Rewords::getRewordPoints).sum();
             summery.setTotalSumOfAllRewards(totalPoints);
@@ -129,14 +135,14 @@ public class RewordsServiceImpl implements RewordOperations {
 
 
     /*
-
-    Mehtod for the calculation for the reword points by tranzaction amount.
+    Method for the calculation for the reword points by transaction amount.
      */
     private static Long calculateRewordsPoints(Double amount) {
         long calculated_Reword_Points = 0;
         try {
             loggerRewordService.info("Getting rewords Calculated By Amount "+ amount + "Started");
             long tranzation_amount = Math.round(amount);
+
             if (tranzation_amount > 100) {
                 calculated_Reword_Points += (tranzation_amount - 100) * 2 + (50);
             } else if (tranzation_amount > 50 && tranzation_amount < 100) {
@@ -144,6 +150,7 @@ public class RewordsServiceImpl implements RewordOperations {
             } else {
                return calculated_Reword_Points;
             }
+
             loggerRewordService.info("Getting rewords Calculated By Amount "+ amount + "Completed");
 
         }
@@ -156,8 +163,9 @@ public class RewordsServiceImpl implements RewordOperations {
     }
 
 
+
     /*
-    Below method gives summery of rewords for Last 3 Month date range;
+    Below method gives summery of rewords for Last 3 Month date range using method rewordSummeryMonthly;
      */
     public List<RewordSummeryByCustomer> getRewordSummeryForLastThreeMonth() {
        List<RewordSummeryByCustomer> all_Customer_RewordSummery_LastThreeMonths = new ArrayList<>();;

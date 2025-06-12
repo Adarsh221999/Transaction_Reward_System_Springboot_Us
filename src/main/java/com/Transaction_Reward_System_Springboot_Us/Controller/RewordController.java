@@ -2,7 +2,7 @@ package com.Transaction_Reward_System_Springboot_Us.Controller;
 
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
 import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
-import com.Transaction_Reward_System_Springboot_Us.RewordService.RewordsServiceImpl;
+import com.Transaction_Reward_System_Springboot_Us.Service.RewordsServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,15 +17,18 @@ import java.util.List;
 @RequestMapping("/reword")
 public class RewordController {
 
+    // Autowired Service Layer Implementation.
     @Autowired
     RewordsServiceImpl rewordsService;
 
+    // Logger for the class to log appropriate messages.
     private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
 
 
     /*
     Controller endpoint for adding reword
-     */
+    Request Body Contains the user request body for adding reword.
+    */
     @PostMapping (value = "/addReword")
     public ResponseEntity<?> addReword(@Valid @RequestBody Rewords request){
         Rewords rewords = null;
@@ -47,8 +50,9 @@ public class RewordController {
 
 
     /*
-    Controller endpoint for getting reword by Reword/tranzactionId
-     */
+    Controller endpoint for getting reword by Reword/transactionId
+    * @Path variable from request to get generated rewords by the past transaction ID
+    */
     @GetMapping(value = "/getrewordpoints/{rewordId}")
     public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Integer rewordId){
         Rewords rewords = null;
@@ -70,7 +74,8 @@ public class RewordController {
 
 
     /*
-    Controller endpoint for getting reword by customer Id
+    Controller endpoint for getting reword by customer id
+    * @PathVariable - CustomerId for identifying the by its id
     */
     @GetMapping(value = "/getAllRewords/{CustomerId}")
     public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Long CustomerId){
@@ -91,10 +96,10 @@ public class RewordController {
     }
 
 
-
     /*
-    Controller endpoint for getting rewordpoints summery by month.
-     */
+      Controller endpoint for getting reword points summery by month for given customer id.
+    * @Pathvariable CustomerId coming for user request.
+    */
     @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
     public ResponseEntity<?> getRewordPointsSummery(@Valid @PathVariable Long CustomerId) {
 
@@ -119,7 +124,8 @@ public class RewordController {
 
     /*
     Controller endpoint for getting rewordpoints summery for last 3 months.
-     */
+    * Do not take any argument.
+    */
         @GetMapping(value = "/getThreeMonthsRewordsSummeryForAllCustomer")
         public ResponseEntity<?> getThreeMonthsRewordsSummeryForAllCustomer() {
 

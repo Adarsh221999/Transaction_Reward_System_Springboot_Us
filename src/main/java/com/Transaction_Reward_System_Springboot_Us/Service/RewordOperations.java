@@ -1,4 +1,4 @@
-package com.Transaction_Reward_System_Springboot_Us.RewordService;
+package com.Transaction_Reward_System_Springboot_Us.Service;
 
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
 import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;

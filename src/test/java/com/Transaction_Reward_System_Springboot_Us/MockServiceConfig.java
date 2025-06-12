@@ -2,7 +2,7 @@ package com.Transaction_Reward_System_Springboot_Us;
 
 
 import com.Transaction_Reward_System_Springboot_Us.Repository.RewordsRepo;
-import com.Transaction_Reward_System_Springboot_Us.RewordService.RewordsServiceImpl;
+import com.Transaction_Reward_System_Springboot_Us.Service.RewordsServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;

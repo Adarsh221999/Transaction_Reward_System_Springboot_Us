@@ -2,7 +2,7 @@ package com.Transaction_Reward_System_Springboot_Us;
 import com.Transaction_Reward_System_Springboot_Us.Controller.RewordController;
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
 import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
-import com.Transaction_Reward_System_Springboot_Us.RewordService.RewordsServiceImpl;
+import com.Transaction_Reward_System_Springboot_Us.Service.RewordsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,19 +26,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class RewordControllerTest {
 
+    // Mocking Service Layer
     @Mock
     private RewordsServiceImpl rewordsService;
 
+    //Injecting into the Conroller Layer All Other Mocks.
     @InjectMocks
     private RewordController rewordController;
 
+    //Mock Mvc For Simulation of Http Calls Mocking
     private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    // Setup for the Mocking
     @BeforeEach
     void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(rewordController).build();
     }
+
+     /*
+    Test Method to get reword adding.
+     */
 
     @Test
     void addRewordTest() throws Exception {
@@ -69,6 +78,10 @@ class RewordControllerTest {
     }
 
 
+
+    /*
+   Test Method to get reword summery for  monthly Summery for only one customer
+    */
     @Test
     void getRewordMonthlyTest() throws Exception {
         RewordSummeryByCustomer request = new RewordSummeryByCustomer();
@@ -106,5 +119,44 @@ class RewordControllerTest {
 
 
     }
+
+
+
+    /*
+    Test Method to get reword summery for 3 months Summery
+     */
+    @Test
+    void testGetThreeMonthsRewordsSummeryForAllCustomer() throws Exception {
+        RewordSummeryByCustomer request = new RewordSummeryByCustomer();
+
+        Map<String , Integer> rewordsByMonth = new HashMap<>();
+        rewordsByMonth.put("2025-07",850);
+        rewordsByMonth.put("2025-06",19850);
+        rewordsByMonth.put("2025-08",9850);
+
+        RewordSummeryByCustomer response = new RewordSummeryByCustomer();
+        response.setCustomerName("Adarsh");
+        response.setCustomerId(10L);
+        response.setTotalSumOfAllRewards(30550L);
+        Map<String , Integer> rewordsByMonthResponce = new HashMap<>();
+        rewordsByMonth.put("2025-07",850);
+        rewordsByMonth.put("2025-06",19850);
+        rewordsByMonth.put("2025-08",9850);
+        response.setRewordPoints(rewordsByMonthResponce);
+
+        Mockito.when(rewordsService.getRewordSummeryForLastThreeMonth()).thenReturn(List.of(response));
+
+        mockMvc.perform(get("/reword/getThreeMonthsRewordsSummeryForAllCustomer")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(response)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].customerName").value("Adarsh"))
+                .andExpect(jsonPath("$[0].customerId").value(10))
+                .andExpect(jsonPath("$[0].rewordPoints").value(rewordsByMonthResponce))
+                .andExpect(jsonPath("$[0].totalSumOfAllRewards").value(30550L));
+
+
+    }
+
 
 }

@@ -11,7 +11,8 @@ import java.util.List;
 public interface RewordsRepo extends JpaRepository<Rewords,Integer> {
 
     /*
-    This method finds the reword transactions by customerId
+    This method finds the reword transactions by CustomerId
+    CustomerId -
      */
     List<Rewords> findByCustomerId(Long CustomerId);
 
