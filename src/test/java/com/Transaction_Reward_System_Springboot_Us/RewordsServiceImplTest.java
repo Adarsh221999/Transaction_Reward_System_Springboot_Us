@@ -11,6 +11,7 @@ import org.mockito.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ public class RewordsServiceImplTest {
     //@Spy
     @InjectMocks
     private RewordsServiceImpl rewordsService;
+
+
 
     //Setting Up the before setup.
     @BeforeEach
@@ -139,21 +142,14 @@ public class RewordsServiceImplTest {
 //        response1.setTotalSumOfAllRewards(270L);
 
 
-
         //Created List Of Rewords for last three months
         List<Rewords> testResultGetByLastThreeMonth = List.of(rewordRequest1);
 
         // Writing dummy logic for the repository layer
         Mockito.when(rewordsRepository.findByDateBetween(startDate,endDate)).thenReturn(testResultGetByLastThreeMonth);
 
-
-        //Calculating Reword Summery for CustomerId.
-        Mockito.when(rewordsService.findRewordSummeryMonthlyByCustomerId(anyLong())).thenReturn(response1);
-
-
         // Created list of summery for each customer for last 3 months.
         List<RewordSummeryByCustomer> rewordSummeryByCustomerListForLastThreeMonth = List.of(response1);
-
 
         //Getting the summery calculated
         Mockito.when(rewordsService.getRewordSummeryForLastThreeMonth()).thenReturn(rewordSummeryByCustomerListForLastThreeMonth);
@@ -185,17 +181,14 @@ public class RewordsServiceImplTest {
     @DisplayName("Testing Monthly Summery Reword Points Endpoint")
     void testfindRewordSummeryMonthlyByCustomerId(){
 
+
+        Long customerId = 123L;
+        List<Rewords> allrewords  = new ArrayList<>();
+
         Map<String , Integer> rewordSummeryByMonth = new HashMap<>();
-        rewordSummeryByMonth.put("2025-05", 90);
-        rewordSummeryByMonth.put("2025-04", 90);
-        rewordSummeryByMonth.put("2025-06", 90);
-
-
-        // Request Setup
-        Rewords request = new Rewords();
-        request.setCustomerName("Adarsh");
-        request.setCustomerId(123L);
-        request.setTransactionAmount(100.00);
+        rewordSummeryByMonth.put("2025-06", 50);
+//      rewordSummeryByMonth.put("2025-04", 90);
+//      rewordSummeryByMonth.put("2025-06", 90);
 
         // Response Setup
         Rewords response = new Rewords();
@@ -212,16 +205,14 @@ public class RewordsServiceImplTest {
         Summeryresponse1.setRewordPoints(rewordSummeryByMonth);
         Summeryresponse1.setTotalSumOfAllRewards(270L);
 
-        // Writing dummy logic for the repository layer
-        Mockito.when(rewordsRepository.findByCustomerId(Mockito.anyLong())).thenReturn(List.of(response));
+        // Adding reword to list
+        allrewords.add(response);
 
-        // Writing dummy logic for the Service layer
-        Mockito.when(rewordsService.findRewordSummeryMonthlyByCustomerId(Mockito.anyLong())).thenReturn((Summeryresponse1));
-
+        //Mocking the Flow of Repository.
+        when(rewordsRepository.findByCustomerId(123L)).thenReturn(allrewords);
 
         //Hitting repository layer for data retrieval.
-        RewordSummeryByCustomer savedRewords = rewordsService.findRewordSummeryMonthlyByCustomerId(response.getCustomerId());
-
+        RewordSummeryByCustomer savedRewords = rewordsService.findRewordSummeryMonthlyByCustomerId(customerId);
 
 
         //Validations of Response.
@@ -252,10 +243,8 @@ public class RewordsServiceImplTest {
         response.setDate((LocalDate.of(2025,6,6)));
 
         // Writing Mock dummy logic for the repository layer
-        Mockito.when(rewordsRepository.getReferenceById(Mockito.anyInt())).thenReturn(response);
+        Mockito.when(rewordsRepository.getById(Mockito.anyInt())).thenReturn(response);
 
-        //Mocking the Repository Logic
-        Mockito.when(rewordsService.getRewordPoints(Mockito.anyInt())).thenReturn(response);
 
         //Hitting repository layer for data retrieval.
         Rewords savedRewords = rewordsService.getRewordPoints(8);

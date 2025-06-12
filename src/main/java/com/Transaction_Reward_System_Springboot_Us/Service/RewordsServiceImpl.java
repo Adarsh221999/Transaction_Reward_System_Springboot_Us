@@ -94,7 +94,7 @@ public class RewordsServiceImpl implements RewordOperations {
     @Override
     public RewordSummeryByCustomer findRewordSummeryMonthlyByCustomerId(Long customerId) {
         RewordSummeryByCustomer summery = new RewordSummeryByCustomer();
-        List<Rewords> allrewords=null;
+        List<Rewords> allrewords=new ArrayList<Rewords>();
         try
         {
             loggerRewordService.info("Getting rewords by CustomerId By Month And Total  "+ customerId);
@@ -107,7 +107,7 @@ public class RewordsServiceImpl implements RewordOperations {
               System.out.println(e.getMessage());
           }
 
-            assert allrewords != null;
+
             if (allrewords.isEmpty())
             {
                 throw new  CustomerNotFoundException("No Customer with the id "+customerId);
@@ -118,8 +118,8 @@ public class RewordsServiceImpl implements RewordOperations {
             summery.setTotalSumOfAllRewards(totalPoints);
             Map<String, Integer>RewordsByMonth = allrewords.stream().collect(Collectors.groupingBy(rewords->rewords.getDate().format(formatter),Collectors.summingInt(s-> Math.toIntExact(s.getRewordPoints()))));
 
-            summery.setCustomerId(repo.findByCustomerId(customerId).get(0).getCustomerId());
-            summery.setCustomerName(repo.findByCustomerId(customerId).get(0).getCustomerName());
+            summery.setCustomerId(repo.findByCustomerId(customerId).getFirst().getCustomerId());
+            summery.setCustomerName(repo.findByCustomerId(customerId).getFirst().getCustomerName());
             summery.setRewordPoints(RewordsByMonth);
 
             loggerRewordService.info("Getting rewords by CustomerId By Month And Total  "+ customerId+"Completed");
