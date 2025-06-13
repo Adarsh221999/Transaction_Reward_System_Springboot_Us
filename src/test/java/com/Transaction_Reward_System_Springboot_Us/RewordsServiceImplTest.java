@@ -80,29 +80,30 @@ public class RewordsServiceImplTest {
 
     }
 
+
+
      /*
     This method tests the response summery for last 3 months for each customer.
      */
     @Test
     @DisplayName("Save reword Summery is obtained for over last 3 months")
-    void testGetRewordSummeryForLastThreeMonth(){
+    void testGetRewordSummeryForLastThreeMonth() {
         //Date for the range
         LocalDate endDate = LocalDate.now();
         //Date for the range
         LocalDate startDate = endDate.minusMonths(3);
+
+        //List of All rewords for last 3 months
+        List<RewordSummeryByCustomer> all_Customer_RewordSummery_LastThreeMonths = new ArrayList<>();
+
         //Map for Summery
         Map<String , Integer> rewordSummeryByMonth = new HashMap<>();
-        rewordSummeryByMonth.put("2025-05", 90);
-        rewordSummeryByMonth.put("2025-04", 90);
-        rewordSummeryByMonth.put("2025-06", 90);
+        //rewordSummeryByMonth.put("2025-05", 90);
+        //rewordSummeryByMonth.put("2025-04", 90);
+        rewordSummeryByMonth.put("2025-06", 100);
 
-        // Request Setup
-        Rewords rewordRequest1 = new Rewords();
-        rewordRequest1.setCustomerName("Adarsh");
-        rewordRequest1.setCustomerId(123L);
-        rewordRequest1.setTransactionAmount(120.00);
 
-        // Response Setup
+        //Response Setup
         Rewords rewordResponse1 = new Rewords();
         rewordResponse1.setCustomerName("Adarsh");
         rewordResponse1.setCustomerId(123L);
@@ -110,71 +111,59 @@ public class RewordsServiceImplTest {
         rewordResponse1.setRewordPoints(50L);
         rewordResponse1.setTransactionId(8);
         rewordResponse1.setDate((LocalDate.of(2025,6,6)));
-//
-//        // Request2 Setup
-//        Rewords rewordRequest2 = new Rewords();
-//        rewordRequest2.setCustomerName("Suraj");
-//        rewordRequest2.setCustomerId(125L);
-//        rewordRequest2.setTransactionAmount(120.00);
 
-//        // Response2 Setup
-//        Rewords rewordResponse2 = new Rewords();
-//        rewordResponse2.setCustomerName("Suraj");
-//        rewordResponse2.setCustomerId(125L);
-//        rewordResponse2.setTransactionAmount(120.00);
-//        rewordResponse2.setRewordPoints(50L);
-//        rewordResponse2.setTransactionId(8);
-//        rewordResponse2.setDate((LocalDate.of(2025,6,6)));
+        // Response2 Setup
+        Rewords rewordResponse2 = new Rewords();
+        rewordResponse2.setCustomerName("Suraj");
+        rewordResponse2.setCustomerId(125L);
+        rewordResponse2.setTransactionAmount(120.00);
+        rewordResponse2.setRewordPoints(50L);
+        rewordResponse2.setTransactionId(8);
+        rewordResponse2.setDate((LocalDate.of(2025,6,6)));
 
-        // List Element 1
+        //List Of Rewords
+        List<Rewords> RewordOfLastThreeMonths = List.of(rewordResponse1,rewordResponse2);
+
+
+
         RewordSummeryByCustomer response1 = new RewordSummeryByCustomer();
         response1.setCustomerName("Adarsh");
         response1.setCustomerId(123L);
         response1.setRewordPoints(rewordSummeryByMonth);
-        response1.setTotalSumOfAllRewards(270L);
+        response1.setTotalSumOfAllRewards(100L);
+
+        RewordSummeryByCustomer response2 = new RewordSummeryByCustomer();
+        response2.setCustomerName("Suraj");
+        response2.setCustomerId(125L);
+        response2.setRewordPoints(rewordSummeryByMonth);
+        response2.setTotalSumOfAllRewards(100L);
+
+        //Responce of Reword Summery By Last theree months endpoint.
+       List<RewordSummeryByCustomer> RewordSummeryLastThreeMonthsMock = List.of(response1,response2);
+
+       //List Of Rewords
+       List<Rewords> rewordOfAllRewords = List.of(rewordResponse1,rewordResponse2);
+
+       //Mocked Steps
+       when(rewordsRepository.findByCustomerId(anyLong())).thenReturn(rewordOfAllRewords);
+
+       when(rewordsRepository.findByDateBetween(startDate,endDate)).thenReturn(RewordOfLastThreeMonths);
 
 
-//        // List Element 2
-//        RewordSummeryByCustomer response2 = new RewordSummeryByCustomer();
-//        response1.setCustomerName("Suraj");
-//        response1.setCustomerId(125L);
-//        response1.setRewordPoints(rewordSummeryByMonth);
-//        response1.setTotalSumOfAllRewards(270L);
+        // Action On Service Layer
+       RewordSummeryLastThreeMonthsMock=rewordsService.getRewordSummeryForLastThreeMonth();
 
-
-        //Created List Of Rewords for last three months
-        List<Rewords> testResultGetByLastThreeMonth = List.of(rewordRequest1);
-
-        // Writing dummy logic for the repository layer
-        Mockito.when(rewordsRepository.findByDateBetween(startDate,endDate)).thenReturn(testResultGetByLastThreeMonth);
-
-        // Created list of summery for each customer for last 3 months.
-        List<RewordSummeryByCustomer> rewordSummeryByCustomerListForLastThreeMonth = List.of(response1);
-
-        //Getting the summery calculated
-        Mockito.when(rewordsService.getRewordSummeryForLastThreeMonth()).thenReturn(rewordSummeryByCustomerListForLastThreeMonth);
-
-
-        //Hitting repository layer for data retrieval of List.
-        List<RewordSummeryByCustomer> rewordSummeryForLastThreeMonth = rewordsService.getRewordSummeryForLastThreeMonth();
-
-        //Validations of Response.
-        assertNotNull(rewordSummeryForLastThreeMonth);
-        assertThat(rewordSummeryForLastThreeMonth.get(0).getCustomerName()).isEqualTo("Adarsh");
-        assertThat(rewordSummeryForLastThreeMonth.get(0).getCustomerId()).isEqualTo(123L);
-        assertThat(rewordSummeryForLastThreeMonth.get(0).getTotalSumOfAllRewards()).isEqualTo(270L);
-        assertThat(rewordSummeryForLastThreeMonth.get(0).getRewordPoints()).isEqualTo(rewordSummeryForLastThreeMonth);
-
-
-//        //Validations of Response second Element from the List.
-//        assertNotNull(rewordSummeryForLastThreeMonth);
-//        assertThat(rewordSummeryForLastThreeMonth.get(1).getCustomerName()).isEqualTo("Suraj");
-//        assertThat(rewordSummeryForLastThreeMonth.get(1).getCustomerId()).isEqualTo(125L);
-//        assertThat(rewordSummeryForLastThreeMonth.get(1).getTotalSumOfAllRewards()).isEqualTo(270L);
-//        assertThat(rewordSummeryForLastThreeMonth.get(1).getRewordPoints()).isEqualTo(rewordSummeryForLastThreeMonth);
+       // Asserction
+       assertNotNull(RewordSummeryLastThreeMonthsMock);
+       assertThat(RewordSummeryLastThreeMonthsMock.getFirst().getCustomerName()).isEqualTo("Adarsh");
+       assertThat(RewordSummeryLastThreeMonthsMock.getFirst().getCustomerId()).isEqualTo(123L);
+       assertThat(RewordSummeryLastThreeMonthsMock.getFirst().getRewordPoints()).isEqualTo(rewordSummeryByMonth);
+       assertThat(RewordSummeryLastThreeMonthsMock.getFirst().getTotalSumOfAllRewards()).isEqualTo(100);
 
 
     }
+
+
 
 
     @Test
@@ -187,8 +176,7 @@ public class RewordsServiceImplTest {
 
         Map<String , Integer> rewordSummeryByMonth = new HashMap<>();
         rewordSummeryByMonth.put("2025-06", 50);
-//      rewordSummeryByMonth.put("2025-04", 90);
-//      rewordSummeryByMonth.put("2025-06", 90);
+
 
         // Response Setup
         Rewords response = new Rewords();
@@ -210,6 +198,8 @@ public class RewordsServiceImplTest {
 
         //Mocking the Flow of Repository.
         when(rewordsRepository.findByCustomerId(123L)).thenReturn(allrewords);
+
+
 
         //Hitting repository layer for data retrieval.
         RewordSummeryByCustomer savedRewords = rewordsService.findRewordSummeryMonthlyByCustomerId(customerId);
