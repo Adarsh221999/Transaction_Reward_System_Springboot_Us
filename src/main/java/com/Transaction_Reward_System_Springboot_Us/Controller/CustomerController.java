@@ -1,9 +1,9 @@
 package com.Transaction_Reward_System_Springboot_Us.Controller;
 
 import com.Transaction_Reward_System_Springboot_Us.Entity.Customer;
-import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
+import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
 import com.Transaction_Reward_System_Springboot_Us.Service.CustomerServiceImpl;
-import com.Transaction_Reward_System_Springboot_Us.Service.RewordsServiceImpl;
+import com.Transaction_Reward_System_Springboot_Us.Service.RewardsServiceImpl;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class CustomerController {
     */
     @PostMapping(value = "/createCustomer")
     public ResponseEntity<?> addCustomer(@Valid @RequestBody Customer request ,@RequestParam String customerName ){
-        Rewords rewords = null;
+        Rewards rewords = null;
         try {
             logger.info("Adding customer in progress: {}", request);
             Customer SavedCustomer= customerService.createCustomer(request);

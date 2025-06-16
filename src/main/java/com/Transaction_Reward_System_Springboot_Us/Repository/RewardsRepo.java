@@ -1,6 +1,6 @@
 package com.Transaction_Reward_System_Springboot_Us.Repository;
 
-import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
+import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,18 +8,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface RewordsRepo extends JpaRepository<Rewords,Integer> {
+public interface RewardsRepo extends JpaRepository<Rewards,Integer> {
 
     /*
     This method finds the reword transactions by CustomerId
     CustomerId -
      */
-    List<Rewords> findByCustomerId(Long CustomerId);
+    List<Rewards> findByCustomerId(Long CustomerId);
 
 
     /*
     This method finds the reword transactions by date range.
      */
-    List<Rewords>findByDateBetween(LocalDate startDate,LocalDate EndDate);
+    List<Rewards>findByDateBetween(LocalDate startDate,LocalDate EndDate);
 
 }

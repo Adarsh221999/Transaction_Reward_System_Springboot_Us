@@ -22,7 +22,7 @@ public class Customer {
     String customerName;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<Rewords> rewords = new ArrayList<>();
+    List<Rewards> rewords = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

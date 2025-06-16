@@ -1,8 +1,8 @@
 package com.Transaction_Reward_System_Springboot_Us;
 
 
-import com.Transaction_Reward_System_Springboot_Us.Repository.RewordsRepo;
-import com.Transaction_Reward_System_Springboot_Us.Service.RewordsServiceImpl;
+import com.Transaction_Reward_System_Springboot_Us.Repository.RewardsRepo;
+import com.Transaction_Reward_System_Springboot_Us.Service.RewardsServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Bean;
 public class MockServiceConfig {
 
     @Bean
-    public RewordsRepo getRewordsRepo(){
-        return Mockito.mock(RewordsRepo.class);
+    public RewardsRepo getRewardsRepo(){
+        return Mockito.mock(RewardsRepo.class);
     }
 
     @Bean
-    public RewordsServiceImpl rewordsService() {
-        return new RewordsServiceImpl(getRewordsRepo());
+    public RewardsServiceImpl RewardsService() {
+        return new RewardsServiceImpl(getRewardsRepo());
     }
 }

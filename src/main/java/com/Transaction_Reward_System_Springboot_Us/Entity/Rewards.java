@@ -14,7 +14,7 @@ import java.util.Objects;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name="Rewords" )
-public class Rewords {
+public class Rewards {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,24 +32,24 @@ public class Rewords {
     private Double transactionAmount;
 
     @Column
-    private Long rewordPoints;
+    private Long rewardPoints;
 
    @ManyToOne
    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public Rewords() {}
+    public Rewards() {}
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Rewords rewords = (Rewords) o;
-        return Objects.equals(transactionId, rewords.transactionId) && Objects.equals(date, rewords.date) && Objects.equals(customerName, rewords.customerName) && Objects.equals(transactionAmount, rewords.transactionAmount) && Objects.equals(rewordPoints, rewords.rewordPoints) && Objects.equals(customer, rewords.customer);
+        Rewards rewords = (Rewards) o;
+        return Objects.equals(transactionId, rewords.transactionId) && Objects.equals(date, rewords.date) && Objects.equals(customerName, rewords.customerName) && Objects.equals(transactionAmount, rewords.transactionAmount) && Objects.equals(rewardPoints, rewords.rewardPoints) && Objects.equals(customer, rewords.customer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, date, customerName, transactionAmount, rewordPoints, customer);
+        return Objects.hash(transactionId, date, customerName, transactionAmount, rewardPoints, customer);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Rewords {
                 ", date=" + date +
                 ", customerName='" + customerName + '\'' +
                 ", transactionAmount=" + transactionAmount +
-                ", rewordPoints=" + rewordPoints +
+                ", rewordPoints=" + rewardPoints +
                 ", customer=" + customer +
                 '}';
     }

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class RewordSummeryByCustomer {
+public class RewardSummeryByCustomer {
 
     private String  customerName;
     private Long customerId;
@@ -17,7 +17,7 @@ public class RewordSummeryByCustomer {
     private Long totalSumOfAllRewards;
 
 
-    public RewordSummeryByCustomer(String customerName, Map<String, Integer> rewordPoints, Long customerId) {
+    public RewardSummeryByCustomer(String customerName, Map<String, Integer> rewordPoints, Long customerId) {
         this.customerName = customerName;
         this.rewordPoints = rewordPoints;
         this.customerId = customerId;
@@ -32,12 +32,12 @@ public class RewordSummeryByCustomer {
                 '}';
     }
 
-    public RewordSummeryByCustomer() {}
+    public RewardSummeryByCustomer() {}
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        RewordSummeryByCustomer that = (RewordSummeryByCustomer) o;
+        RewardSummeryByCustomer that = (RewardSummeryByCustomer) o;
         return Objects.equals(customerName, that.customerName) && Objects.equals(rewordPoints, that.rewordPoints) && Objects.equals(customerId, that.customerId);
     }
 

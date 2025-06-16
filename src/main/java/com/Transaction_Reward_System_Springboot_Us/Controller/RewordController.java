@@ -1,8 +1,8 @@
 package com.Transaction_Reward_System_Springboot_Us.Controller;
 
-import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
-import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
-import com.Transaction_Reward_System_Springboot_Us.Service.RewordsServiceImpl;
+import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
+import com.Transaction_Reward_System_Springboot_Us.Models.RewardSummeryByCustomer;
+import com.Transaction_Reward_System_Springboot_Us.Service.RewardsServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,7 +20,7 @@ import java.util.List;
 public class RewordController {
 
     @Autowired
-    RewordsServiceImpl rewordsService;
+    RewardsServiceImpl rewordsService;
 
     private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
 
@@ -29,11 +29,11 @@ public class RewordController {
     Request Body Contains the user request body for adding reword.
     */
     @PostMapping (value = "/addReword")
-    public ResponseEntity<?> addReword(@Valid @RequestBody Rewords request){
-        Rewords rewords = null;
+    public ResponseEntity<?> addReword(@Valid @RequestBody Rewards request){
+        Rewards rewords = null;
         try {
             logger.info("Received request to add reward: {}", request);
-            rewords = rewordsService.addRewordPoints(request);
+            rewords = rewordsService.addRewardPoints(request);
             logger.info("Completed request to add reward: {}", request);
             return new ResponseEntity<>(rewords, HttpStatus.OK);
         }
@@ -51,10 +51,10 @@ public class RewordController {
     */
     @GetMapping(value = "/getrewordpoints/{rewordId}")
     public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Integer rewordId){
-        Rewords rewords = null;
+        Rewards rewords = null;
         try {
             logger.info("Received request to get reword by tranzactionId: {}", rewordId);
-            rewords = rewordsService.getRewordPoints(rewordId);
+            rewords = rewordsService.getRewardPoints(rewordId);
             logger.info("Completed request to get reword by the Id: {}", rewordId);
             return new ResponseEntity<>(rewords, HttpStatus.OK);
         }
@@ -73,7 +73,7 @@ public class RewordController {
     @GetMapping(value = "/getAllRewords/{CustomerId}")
     public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Long CustomerId){
 
-        List<Rewords> rewordsList=null;
+        List<Rewards> rewordsList=null;
         try {
             logger.info("Received request to get All reword by transactionId: {}", CustomerId);
             rewordsList = rewordsService.findByCustomerId(CustomerId);
@@ -100,11 +100,11 @@ public class RewordController {
             )
     {
 
-        RewordSummeryByCustomer summery = null;
+        RewardSummeryByCustomer summery = null;
 
         try {
             logger.info("Received request to get All reword by Month CustomerId: {}", CustomerId);
-            summery = rewordsService.findRewordSummeryMonthlyByCustomerId(CustomerId,StartDate,EndDate);
+            summery = rewordsService.findRewardSummeryMonthlyByCustomerId(CustomerId,StartDate,EndDate);
             logger.info("Completed request to get All reword by Month CustomerId: {}", CustomerId);
 
             return new ResponseEntity<>(summery, HttpStatus.OK);
@@ -130,7 +130,7 @@ public class RewordController {
            // RewordSummeryByCustomer summeryThreeMonths = null;
             try {
                 logger.info("Received request to get All reword summery for three months by each customer: {}");
-                List<RewordSummeryByCustomer> threeMontsSummmery = rewordsService.getRewordSummeryForLastThreeMonth(StartDate ,EndDate );
+                List<RewardSummeryByCustomer> threeMontsSummmery = rewordsService.getRewardsummeryForLastThreeMonth(StartDate ,EndDate );
                 logger.info("Received request to get All reword summery for three months by each customer:{}");
 
                 return new ResponseEntity<>(threeMontsSummmery, HttpStatus.OK);
