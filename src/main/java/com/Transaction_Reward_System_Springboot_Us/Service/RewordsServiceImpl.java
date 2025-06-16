@@ -1,17 +1,14 @@
 package com.Transaction_Reward_System_Springboot_Us.Service;
 
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewords;
-import com.Transaction_Reward_System_Springboot_Us.Exception.CustomerNotFoundException;
-import com.Transaction_Reward_System_Springboot_Us.Exception.FailedToGetRewordSummeryForLastThreeMonth;
-import com.Transaction_Reward_System_Springboot_Us.Exception.RewordTransactionNotFound;
-import com.Transaction_Reward_System_Springboot_Us.Exception.TransactionFailed;
+import com.Transaction_Reward_System_Springboot_Us.Exception.*;
 import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustomer;
+import com.Transaction_Reward_System_Springboot_Us.Repository.CustomerRepo;
 import com.Transaction_Reward_System_Springboot_Us.Repository.RewordsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -22,11 +19,13 @@ import java.util.stream.Collectors;
 @Service
 public class RewordsServiceImpl implements RewordOperations {
 
-    //Autowiring the Rewords repository.
     @Autowired
     private RewordsRepo repo;
 
-    //Logger Implementation
+    @Autowired
+    private CustomerRepo customerRepo;
+
+
     private static final Logger loggerRewordService = LoggerFactory.getLogger(RewordsServiceImpl.class);
 
     //Constructor for the class
@@ -50,13 +49,25 @@ public class RewordsServiceImpl implements RewordOperations {
             loggerRewordService.info("Adding reword at service level "+ rewords);
             rewords.setRewordPoints(calculateRewordsPoints(rewords.getTransactionAmount()));
             rewords.setDate(LocalDate.now());
-            System.out.print(rewords.toString());
-            savedReword=repo.save(rewords);
+            boolean isUserExist = customerRepo.existsById(rewords.getCustomer().getId());
+            try {
+                if (isUserExist) {
+                    savedReword = repo.save(rewords);
+                }
+                else
+                {
+                    throw new CustomerAlreadyExists("Customer Not Exist By Id"+ rewords.getCustomer().getId());
+                }
+            }
+            catch (CustomerAlreadyExists e){
+                 throw new CustomerAlreadyExists("Customer Not Exist By Id"+ rewords.getCustomer().getId());
+            }
+
             loggerRewordService.info("Adding reword at service level Completed"+ rewords);
 
         } catch (Exception e) {
             loggerRewordService.warn("Exception While Adding reword at service level "+ rewords);
-            throw new TransactionFailed("Adding Rewords Tranzation Failed");
+            throw new TransactionFailed("Adding Rewords Transaction Failed Either Customer Not Exist or any other error.  ");
         }
         return savedReword;
     }
@@ -84,7 +95,7 @@ public class RewordsServiceImpl implements RewordOperations {
      Method for the calculation for the reword Summery points by Customer ID.
     */
     @Override
-    public RewordSummeryByCustomer findRewordSummeryMonthlyByCustomerId(Long customerId) {
+    public RewordSummeryByCustomer findRewordSummeryMonthlyByCustomerId(Long customerId, LocalDate StartDate , LocalDate EndDate) {
         RewordSummeryByCustomer summery = new RewordSummeryByCustomer();
         List<Rewords> allrewords=new ArrayList<Rewords>();
         try
@@ -98,19 +109,16 @@ public class RewordsServiceImpl implements RewordOperations {
           catch (CustomerNotFoundException e){
               System.out.println(e.getMessage());
           }
-
-
             if (allrewords.isEmpty())
             {
                 throw new  CustomerNotFoundException("No Customer with the id "+customerId);
             }
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM");
             totalPoints=allrewords.stream().mapToLong(Rewords::getRewordPoints).sum();
             summery.setTotalSumOfAllRewards(totalPoints);
             Map<String, Integer>RewordsByMonth = allrewords.stream().collect(Collectors.groupingBy(rewords->rewords.getDate().format(formatter),Collectors.summingInt(s-> Math.toIntExact(s.getRewordPoints()))));
 
-            summery.setCustomerId(repo.findByCustomerId(customerId).getFirst().getCustomer().getCustomer_id());
+            summery.setCustomerId(repo.findByCustomerId(customerId).getFirst().getCustomer().getId());
             summery.setCustomerName(repo.findByCustomerId(customerId).getFirst().getCustomerName());
             summery.setRewordPoints(RewordsByMonth);
 
@@ -158,9 +166,12 @@ public class RewordsServiceImpl implements RewordOperations {
     public List<RewordSummeryByCustomer> getRewordSummeryForLastThreeMonth(LocalDate StartDate, LocalDate EndDate) {
        List<RewordSummeryByCustomer> all_Customer_RewordSummery_LastThreeMonths = new ArrayList<>();;
         try {
+            if (StartDate.isAfter(EndDate)){
+                throw new IllegalArgumentException("Start Date Should Not Be Greater Than EndDate");
+            }
             List<Rewords> RewordOfLastThreeMonths = repo.findByDateBetween(StartDate,EndDate);
             for (Rewords rewords : RewordOfLastThreeMonths) {
-                RewordSummeryByCustomer rewordSummeryMonthlyByCustomerId = findRewordSummeryMonthlyByCustomerId(rewords.getCustomer().getCustomer_id());
+                RewordSummeryByCustomer rewordSummeryMonthlyByCustomerId = findRewordSummeryMonthlyByCustomerId(rewords.getCustomer().getId(),StartDate,EndDate);
                 if(all_Customer_RewordSummery_LastThreeMonths.contains(rewordSummeryMonthlyByCustomerId)){
                     continue;
                 }

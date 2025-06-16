@@ -5,6 +5,7 @@ import com.Transaction_Reward_System_Springboot_Us.Models.RewordSummeryByCustome
 import com.Transaction_Reward_System_Springboot_Us.Service.RewordsServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +19,9 @@ import java.util.List;
 @RequestMapping("/reword")
 public class RewordController {
 
-    // Autowired Service Layer Implementation.
     @Autowired
     RewordsServiceImpl rewordsService;
 
-    // Logger for the class to log appropriate messages.
     private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
 
     /*
@@ -94,13 +93,18 @@ public class RewordController {
     * @Pathvariable CustomerId coming for user request.
     */
     @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
-    public ResponseEntity<?> getRewordPointsSummery(@Valid @PathVariable Long CustomerId) {
+    public ResponseEntity<?> getRewordPointsSummery(
+            @Valid @PathVariable Long CustomerId,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate StartDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate EndDate
+            )
+    {
 
         RewordSummeryByCustomer summery = null;
 
         try {
             logger.info("Received request to get All reword by Month CustomerId: {}", CustomerId);
-            summery = rewordsService.findRewordSummeryMonthlyByCustomerId(CustomerId);
+            summery = rewordsService.findRewordSummeryMonthlyByCustomerId(CustomerId,StartDate,EndDate);
             logger.info("Completed request to get All reword by Month CustomerId: {}", CustomerId);
 
             return new ResponseEntity<>(summery, HttpStatus.OK);
@@ -117,7 +121,11 @@ public class RewordController {
     * Do not take any argument.
     */
         @GetMapping(value = "/getThreeMonthsRewordsSummeryForAllCustomer")
-        public ResponseEntity<?> getThreeMonthsRewordsSummeryForAllCustomer(LocalDate StartDate,LocalDate EndDate) {
+        public ResponseEntity<?> getThreeMonthsRewordsSummeryForAllCustomer
+        (
+         @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate StartDate,
+         @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate EndDate
+         ) {
 
            // RewordSummeryByCustomer summeryThreeMonths = null;
             try {

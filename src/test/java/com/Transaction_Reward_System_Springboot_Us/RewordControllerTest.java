@@ -52,12 +52,12 @@ class RewordControllerTest {
     void addRewordTest() throws Exception {
         Rewords request = new Rewords();
         request.setCustomerName("Adarsh");
-        request.setCustomerId(123L);
+        //request.setCustomerId(123L);
         request.setTransactionAmount(100.00);
 
         Rewords response = new Rewords();
         response.setCustomerName("Adarsh");
-        response.setCustomerId(123L);
+        //response.setCustomerId(123L);
         response.setTransactionAmount(100.00);
         response.setRewordPoints(50L);
         response.setTransactionId(8);
@@ -106,7 +106,7 @@ class RewordControllerTest {
         rewordsByMonth.put("2025-08",9850);
         response.setRewordPoints(rewordsByMonthResponce);
 
-        Mockito.when(rewordsService.findRewordSummeryMonthlyByCustomerId(Mockito.anyLong())).thenReturn(response);
+        Mockito.when(rewordsService.findRewordSummeryMonthlyByCustomerId(Mockito.anyLong(),Mockito.any(),Mockito.any())).thenReturn(response);
 
         mockMvc.perform(get("/reword/getRewordsByMonth/10")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -144,7 +144,7 @@ class RewordControllerTest {
         rewordsByMonth.put("2025-08",9850);
         response.setRewordPoints(rewordsByMonthResponce);
 
-        Mockito.when(rewordsService.getRewordSummeryForLastThreeMonth()).thenReturn(List.of(response));
+        Mockito.when(rewordsService.getRewordSummeryForLastThreeMonth(Mockito.any(),Mockito.any())).thenReturn(List.of(response));
 
         mockMvc.perform(get("/reword/getThreeMonthsRewordsSummeryForAllCustomer")
                         .contentType(MediaType.APPLICATION_JSON)

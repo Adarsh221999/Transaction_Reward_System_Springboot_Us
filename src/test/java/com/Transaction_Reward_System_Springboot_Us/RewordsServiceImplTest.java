@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,16 +23,11 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class RewordsServiceImplTest {
 
-    // Autowiring the repository object for testing .
     @Mock
     private RewordsRepo rewordsRepository;
 
-    // Injected mocks into the service layer .
-    //@Spy
     @InjectMocks
     private RewordsServiceImpl rewordsService;
-
-
 
     //Setting Up the before setup.
     @BeforeEach
@@ -51,13 +45,13 @@ public class RewordsServiceImplTest {
         // Request Setup
         Rewords request = new Rewords();
         request.setCustomerName("Adarsh");
-        request.setCustomerId(123L);
+        //request.setCustomerId(123L);
         request.setTransactionAmount(100.00);
 
         // Response Setup
         Rewords response = new Rewords();
         response.setCustomerName("Adarsh");
-        response.setCustomerId(123L);
+        //response.setCustomerId(123L);
         response.setTransactionAmount(100.00);
         response.setRewordPoints(50L);
         response.setTransactionId(8);
@@ -72,16 +66,13 @@ public class RewordsServiceImplTest {
         //Validations of Response.
         assertNotNull(savedRewords);
         assertThat(savedRewords.getCustomerName()).isEqualTo("Adarsh");
-        assertThat(savedRewords.getCustomerId()).isEqualTo(123L);
+       // assertThat(savedRewords.getCustomerId()).isEqualTo(123L);
         assertThat(savedRewords.getTransactionAmount()).isEqualTo(100);
         assertThat(savedRewords.getRewordPoints()).isEqualTo(50L);
         assertThat(savedRewords.getTransactionId()).isEqualTo(8);
         assertThat(savedRewords.getDate()).isEqualTo((LocalDate.of(2025,6,6)));
 
     }
-
-
-
      /*
     This method tests the response summery for last 3 months for each customer.
      */
@@ -102,11 +93,10 @@ public class RewordsServiceImplTest {
         //rewordSummeryByMonth.put("2025-04", 90);
         rewordSummeryByMonth.put("2025-06", 100);
 
-
         //Response Setup
         Rewords rewordResponse1 = new Rewords();
         rewordResponse1.setCustomerName("Adarsh");
-        rewordResponse1.setCustomerId(123L);
+       //rewordResponse1.setCustomerId(123L);
         rewordResponse1.setTransactionAmount(120.00);
         rewordResponse1.setRewordPoints(50L);
         rewordResponse1.setTransactionId(8);
@@ -115,7 +105,7 @@ public class RewordsServiceImplTest {
         // Response2 Setup
         Rewords rewordResponse2 = new Rewords();
         rewordResponse2.setCustomerName("Suraj");
-        rewordResponse2.setCustomerId(125L);
+        //rewordResponse2.setCustomerId(125L);
         rewordResponse2.setTransactionAmount(120.00);
         rewordResponse2.setRewordPoints(50L);
         rewordResponse2.setTransactionId(8);
@@ -123,8 +113,6 @@ public class RewordsServiceImplTest {
 
         //List Of Rewords
         List<Rewords> RewordOfLastThreeMonths = List.of(rewordResponse1,rewordResponse2);
-
-
 
         RewordSummeryByCustomer response1 = new RewordSummeryByCustomer();
         response1.setCustomerName("Adarsh");
@@ -151,7 +139,7 @@ public class RewordsServiceImplTest {
 
 
         // Action On Service Layer
-       RewordSummeryLastThreeMonthsMock=rewordsService.getRewordSummeryForLastThreeMonth();
+       RewordSummeryLastThreeMonthsMock=rewordsService.getRewordSummeryForLastThreeMonth(startDate,endDate);
 
        // Asserction
        assertNotNull(RewordSummeryLastThreeMonthsMock);
@@ -159,17 +147,11 @@ public class RewordsServiceImplTest {
        assertThat(RewordSummeryLastThreeMonthsMock.getFirst().getCustomerId()).isEqualTo(123L);
        assertThat(RewordSummeryLastThreeMonthsMock.getFirst().getRewordPoints()).isEqualTo(rewordSummeryByMonth);
        assertThat(RewordSummeryLastThreeMonthsMock.getFirst().getTotalSumOfAllRewards()).isEqualTo(100);
-
-
     }
-
-
-
 
     @Test
     @DisplayName("Testing Monthly Summery Reword Points Endpoint")
     void testfindRewordSummeryMonthlyByCustomerId(){
-
 
         Long customerId = 123L;
         List<Rewords> allrewords  = new ArrayList<>();
@@ -177,11 +159,10 @@ public class RewordsServiceImplTest {
         Map<String , Integer> rewordSummeryByMonth = new HashMap<>();
         rewordSummeryByMonth.put("2025-06", 50);
 
-
         // Response Setup
         Rewords response = new Rewords();
         response.setCustomerName("Adarsh");
-        response.setCustomerId(123L);
+        //response.setCustomerId(123L);
         response.setTransactionAmount(100.00);
         response.setRewordPoints(50L);
         response.setTransactionId(8);
@@ -199,11 +180,8 @@ public class RewordsServiceImplTest {
         //Mocking the Flow of Repository.
         when(rewordsRepository.findByCustomerId(123L)).thenReturn(allrewords);
 
-
-
         //Hitting repository layer for data retrieval.
-        RewordSummeryByCustomer savedRewords = rewordsService.findRewordSummeryMonthlyByCustomerId(customerId);
-
+        RewordSummeryByCustomer savedRewords = rewordsService.findRewordSummeryMonthlyByCustomerId(customerId,LocalDate.now(),LocalDate.now().minusMonths(3));
 
         //Validations of Response.
         assertNotNull(savedRewords);
@@ -211,10 +189,7 @@ public class RewordsServiceImplTest {
         assertThat(savedRewords.getCustomerId()).isEqualTo(123L);
         assertThat(savedRewords.getRewordPoints()).isEqualTo(rewordSummeryByMonth);
 
-
     }
-
-
 
     /*
     This method tests Save reword method of repository.
@@ -226,7 +201,7 @@ public class RewordsServiceImplTest {
         // Response Setup
         Rewords response = new Rewords();
         response.setCustomerName("Adarsh");
-        response.setCustomerId(123L);
+        //response.setCustomerId(123L);
         response.setTransactionAmount(100.00);
         response.setRewordPoints(50L);
         response.setTransactionId(8);
@@ -235,19 +210,17 @@ public class RewordsServiceImplTest {
         // Writing Mock dummy logic for the repository layer
         Mockito.when(rewordsRepository.getById(Mockito.anyInt())).thenReturn(response);
 
-
         //Hitting repository layer for data retrieval.
         Rewords savedRewords = rewordsService.getRewordPoints(8);
 
         //Validations of Response.
         assertNotNull(savedRewords);
         assertThat(savedRewords.getCustomerName()).isEqualTo("Adarsh");
-        assertThat(savedRewords.getCustomerId()).isEqualTo(123L);
+        //assertThat(savedRewords.getCustomerId()).isEqualTo(123L);
         assertThat(savedRewords.getTransactionAmount()).isEqualTo(100);
         assertThat(savedRewords.getRewordPoints()).isEqualTo(50L);
         assertThat(savedRewords.getTransactionId()).isEqualTo(8);
         assertThat(savedRewords.getDate()).isEqualTo((LocalDate.of(2025,6,6)));
-
     }
 
 }

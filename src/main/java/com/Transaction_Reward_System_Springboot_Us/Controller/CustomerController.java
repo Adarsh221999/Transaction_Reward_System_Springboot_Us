@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer")
@@ -29,12 +26,12 @@ public class CustomerController {
     Controller endpoint for adding reword
     Request Body Contains the user request body for adding reword.
     */
-    @PostMapping(value = "/addCustomer")
-    public ResponseEntity<?> addCustomer(@Valid @RequestBody Customer request){
+    @PostMapping(value = "/createCustomer")
+    public ResponseEntity<?> addCustomer(@Valid @RequestBody Customer request ,@RequestParam String customerName ){
         Rewords rewords = null;
         try {
             logger.info("Adding customer in progress: {}", request);
-            Customer SavedCustomer= customerService.addCustomer(request);
+            Customer SavedCustomer= customerService.createCustomer(request);
             logger.info("Completed request to add Customer: {}", request);
             return new ResponseEntity<>(SavedCustomer, HttpStatus.OK);
         }
