@@ -23,7 +23,6 @@ public class Rewords {
     @Column
     private LocalDate date;
 
-
     @Column
     @NotNull
     private String  customerName;
@@ -35,32 +34,33 @@ public class Rewords {
     @Column
     private Long rewordPoints;
 
-    @Column(nullable = false , unique = false)
-    private Long customerId;
+   @ManyToOne
+   @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     public Rewords() {}
-
-    @Override
-    public String toString() {
-        return "Rewords{" +
-                "tranzationId=" + transactionId +
-                ", date=" + date +
-                ", customerName='" + customerName + '\'' +
-                ", transactionAmount=" + transactionAmount +
-                ", rewordPoints=" + rewordPoints +
-                ", customerId=" + customerId +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Rewords rewords = (Rewords) o;
-        return Objects.equals(transactionId, rewords.transactionId) && Objects.equals(date, rewords.date) && Objects.equals(customerName, rewords.customerName) && Objects.equals(transactionAmount, rewords.transactionAmount) && Objects.equals(rewordPoints, rewords.rewordPoints) && Objects.equals(customerId, rewords.customerId);
+        return Objects.equals(transactionId, rewords.transactionId) && Objects.equals(date, rewords.date) && Objects.equals(customerName, rewords.customerName) && Objects.equals(transactionAmount, rewords.transactionAmount) && Objects.equals(rewordPoints, rewords.rewordPoints) && Objects.equals(customer, rewords.customer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, date, customerName, transactionAmount, rewordPoints, customerId);
+        return Objects.hash(transactionId, date, customerName, transactionAmount, rewordPoints, customer);
+    }
+
+    @Override
+    public String toString() {
+        return "Rewords{" +
+                "transactionId=" + transactionId +
+                ", date=" + date +
+                ", customerName='" + customerName + '\'' +
+                ", transactionAmount=" + transactionAmount +
+                ", rewordPoints=" + rewordPoints +
+                ", customer=" + customer +
+                '}';
     }
 }

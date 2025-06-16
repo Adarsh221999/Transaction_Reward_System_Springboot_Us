@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,6 @@ public class RewordController {
 
     // Logger for the class to log appropriate messages.
     private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
-
 
     /*
     Controller endpoint for adding reword
@@ -46,9 +46,6 @@ public class RewordController {
 
     }
 
-
-
-
     /*
     Controller endpoint for getting reword by Reword/transactionId
     * @Path variable from request to get generated rewords by the past transaction ID
@@ -69,9 +66,6 @@ public class RewordController {
         }
 
     }
-
-
-
 
     /*
     Controller endpoint for getting reword by customer id
@@ -94,7 +88,6 @@ public class RewordController {
 
         }
     }
-
 
     /*
       Controller endpoint for getting reword points summery by month for given customer id.
@@ -119,20 +112,17 @@ public class RewordController {
 
     }
 
-
-
-
     /*
     Controller endpoint for getting rewordpoints summery for last 3 months.
     * Do not take any argument.
     */
         @GetMapping(value = "/getThreeMonthsRewordsSummeryForAllCustomer")
-        public ResponseEntity<?> getThreeMonthsRewordsSummeryForAllCustomer() {
+        public ResponseEntity<?> getThreeMonthsRewordsSummeryForAllCustomer(LocalDate StartDate,LocalDate EndDate) {
 
            // RewordSummeryByCustomer summeryThreeMonths = null;
             try {
                 logger.info("Received request to get All reword summery for three months by each customer: {}");
-                List<RewordSummeryByCustomer> threeMontsSummmery = rewordsService.getRewordSummeryForLastThreeMonth();
+                List<RewordSummeryByCustomer> threeMontsSummmery = rewordsService.getRewordSummeryForLastThreeMonth(StartDate ,EndDate );
                 logger.info("Received request to get All reword summery for three months by each customer:{}");
 
                 return new ResponseEntity<>(threeMontsSummmery, HttpStatus.OK);
