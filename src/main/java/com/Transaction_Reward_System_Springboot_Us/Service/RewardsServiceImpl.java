@@ -10,10 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -113,14 +112,15 @@ public class RewardsServiceImpl implements RewardOperations {
             {
                 throw new  CustomerNotFoundException("No Customer with the id "+customerId);
             }
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM");
+            //summery.setTransactionList(allRewards);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM", Locale.ENGLISH);
             totalPoints=allRewards.stream().mapToLong(Rewards::getRewardPoints).sum();
             summery.setTotalSumOfAllRewards(totalPoints);
-            Map<String, Integer>RewardsByMonth = allRewards.stream().collect(Collectors.groupingBy(Rewards->Rewards.getDate().format(formatter),Collectors.summingInt(s-> Math.toIntExact(s.getRewardPoints()))));
-
+            Map<String, Integer>RewardsByMonth = allRewards.stream().collect(Collectors.groupingBy(Rewords->(Rewords.getDate().format(formatter)),Collectors.summingInt(points->points.getRewardPoints().intValue())));
+            Set<Map.Entry<String,Integer>> listOfRewardPointsByMonth= RewardsByMonth.entrySet();
             summery.setCustomerId(repo.findByCustomerId(customerId).getFirst().getCustomer().getId());
             summery.setCustomerName(repo.findByCustomerId(customerId).getFirst().getCustomerName());
-            summery.setRewordPoints(RewardsByMonth);
+            summery.setRewordPoints(listOfRewardPointsByMonth);
 
             loggerRewardservice.info("Getting Rewards by CustomerId By Month And Total  "+ customerId+"Completed");
             return summery;
