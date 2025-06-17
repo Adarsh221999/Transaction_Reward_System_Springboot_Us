@@ -133,19 +133,21 @@ spring.jpa.hibernate.ddl-auto=update
 **Endpoint:**
 
 ```
-GET http://localhost:8084/reword/getRewordsByMonth/4?startDate=2025-03-01&endDate=2025-06-16
+GET http://localhost:8084/reword/getRewordsByMonth/2?startDate=2025-03-01&endDate=2025-06-16
 ```
 
 **Response:**
 
 ```json
 {
-  "customerName": "Adarsh Chimgaonakr",
-  "customerId": 4,
+  "customerName": "Akhilesh Magdum",
+  "customerId": 2,
   "rewordPoints": {
-    "2025-Jun": 230
+    "2025-May": 90,
+    "2025-Jun": 110,
+    "2025-Apr": 230
   },
-  "totalSumOfAllRewards": 230
+  "totalSumOfAllRewards": 430
 }
 ```
 
