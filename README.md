@@ -8,7 +8,7 @@ A Spring Boot application that provides APIs for managing and analyzing customer
 - Spring Boot 3.x
 - Spring Data JPA
 - Hibernate
-- MySQL or H2 (for development)
+- MySQL
 - Jakarta Validation
 - SLF4J (Logging)
 - Maven
