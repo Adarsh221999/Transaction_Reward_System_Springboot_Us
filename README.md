@@ -73,14 +73,14 @@ GET http://localhost:8085/rewords/getRewordsByMonth/10
 
 ```json
 {
-  "customerName": "Adarsh",
-  "customerId": 10,
+  "customerName": "Akhilesh Magdum",
+  "customerId": 2,
   "rewordPoints": {
-    "2025-07": 850,
-    "2025-06": 39700,
-    "2025-08": 9850
+    "2025-May": 90,
+    "2025-Jun": 110,
+    "2025-Apr": 230
   },
-  "totalSumOfAllRewards": 50400
+  "totalSumOfAllRewards": 430
 }
 ```
 
