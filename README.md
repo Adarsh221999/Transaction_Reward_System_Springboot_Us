@@ -98,12 +98,32 @@ POST http://localhost:8085/rewords/addReword
 
 ```json
 {
-  "customerName": "Adarsh",
-  "transactionAmount": 10000.00,
-  "customerId": 10
+  "customerName":"Sunil Karde",
+  "transactionAmount":130.00 ,
+  "customer":{
+    "id":6,
+    "customerName":"Sunil Karde",
+    "rewords":[]
+
+  }
 }
 ```
+**Response Body:**
 
+```json
+{
+  "transactionId": 5,
+  "date": "2025-06-17",
+  "customerName": "Sunil Karde",
+  "transactionAmount": 130.0,
+  "rewardPoints": 110,
+  "customer": {
+    "id": 6,
+    "customerName": "Sunil Karde",
+    "rewords": []
+  }
+}
+```
 ---
 
 #### 4. Running the Project
