@@ -46,49 +46,6 @@ public class RewordController {
     }
 
     /*
-    Controller endpoint for getting reword by Reword/transactionId
-    * @Path variable from request to get generated rewords by the past transaction ID
-    */
-    @GetMapping(value = "/getrewordpoints/{rewordId}")
-    public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Integer rewordId){
-        Rewards rewords = null;
-        try {
-            logger.info("Received request to get reword by tranzactionId: {}", rewordId);
-            rewords = rewordsService.getRewardPoints(rewordId);
-            logger.info("Completed request to get reword by the Id: {}", rewordId);
-            return new ResponseEntity<>(rewords, HttpStatus.OK);
-        }
-        catch (Exception e){
-            logger.warn("Exception request to get All reword by tranzactionId: {}", rewordId);
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
-
-        }
-
-    }
-
-    /*
-    Controller endpoint for getting reword by customer id
-    * @PathVariable - CustomerId for identifying the by its id
-    */
-    @GetMapping(value = "/getAllRewords/{CustomerId}")
-    public ResponseEntity<?> getRewordPoints(@Valid @PathVariable Long CustomerId){
-
-        List<Rewards> rewordsList=null;
-        try {
-            logger.info("Received request to get All reword by transactionId: {}", CustomerId);
-            rewordsList = rewordsService.findByCustomerId(CustomerId);
-            logger.info("Completed request to get All reword by transactionId: {}", CustomerId);
-
-            return new ResponseEntity<>(rewordsList, HttpStatus.OK);
-        }
-        catch (Exception e){
-            logger.info("Exception while request to get All reword by CustomerId: {}", CustomerId);
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
-
-        }
-    }
-
-    /*
       Controller endpoint for getting reword points summery by month for given customer id.
     * @Pathvariable CustomerId coming for user request.
     */

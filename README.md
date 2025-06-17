@@ -92,8 +92,18 @@ Response-
 "customerName": "Akhilesh Magdum",
 "customerId": 2,
 "rewordPoints": {
-"2025-Jun": 430
+"2025-May": 90,
+"2025-Jun": 110,
+"2025-Apr": 230
 },
 "totalSumOfAllRewards": 430
+},
+{
+"customerName": "Sunil Karde",
+"customerId": 6,
+"rewordPoints": {
+"2025-Jun": 110
+},
+"totalSumOfAllRewards": 110
 }
 ]
