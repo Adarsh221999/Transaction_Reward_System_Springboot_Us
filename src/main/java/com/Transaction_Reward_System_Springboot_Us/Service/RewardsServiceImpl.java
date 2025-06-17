@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -97,6 +96,8 @@ public class RewardsServiceImpl implements RewardOperations {
     public RewardSummeryByCustomer findRewardSummeryMonthlyByCustomerId(Long customerId, LocalDate StartDate, LocalDate EndDate) {
         RewardSummeryByCustomer summery = new RewardSummeryByCustomer();
         List<Rewards> allRewards=new ArrayList<Rewards>();
+        List<Rewards> transactionRecords=new ArrayList<Rewards>();
+
         try
         {
             loggerRewardservice.info("Getting Rewards by CustomerId By Month And Total  "+ customerId);
@@ -112,7 +113,6 @@ public class RewardsServiceImpl implements RewardOperations {
             {
                 throw new  CustomerNotFoundException("No Customer with the id "+customerId);
             }
-            //summery.setTransactionList(allRewards);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM", Locale.ENGLISH);
             totalPoints=allRewards.stream().mapToLong(Rewards::getRewardPoints).sum();
             summery.setTotalSumOfAllRewards(totalPoints);
@@ -139,12 +139,12 @@ public class RewardsServiceImpl implements RewardOperations {
         long calculated_Reword_Points = 0;
         try {
             loggerRewardservice.info("Getting Rewards Calculated By Amount "+ amount + "Started");
-            long tranzation_amount = Math.round(amount);
+            long transaction_amount = Math.round(amount);
 
-            if (tranzation_amount > 100) {
-                calculated_Reword_Points += (tranzation_amount - 100) * 2 + (50);
-            } else if (tranzation_amount > 50 && tranzation_amount < 100) {
-                calculated_Reword_Points = (tranzation_amount - 50);
+            if (transaction_amount > 100) {
+                calculated_Reword_Points += (transaction_amount - 100) * 2 + (50);
+            } else if (transaction_amount > 50 && transaction_amount < 100) {
+                calculated_Reword_Points = (transaction_amount - 50);
             } else {
                return calculated_Reword_Points;
             }

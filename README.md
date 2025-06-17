@@ -162,11 +162,18 @@ GET http://localhost:8084/reword/getRewordsByMonth/2?startDate=2025-03-01&endDat
 {
   "customerName": "Akhilesh Magdum",
   "customerId": 2,
-  "rewordPoints": {
-    "2025-May": 90,
-    "2025-Jun": 110,
-    "2025-Apr": 230
-  },
+  "transactionList": null,
+  "rewordPoints": [
+    {
+      "Jun": 110
+    },
+    {
+      "Apr": 230
+    },
+    {
+      "May": 90
+    }
+  ],
   "totalSumOfAllRewards": 430
 }
 ```
@@ -188,27 +195,40 @@ GET http://localhost:8084/reword/getThreeMonthsRewordsSummeryForAllCustomer?star
   {
     "customerName": "Adarsh Chimgaonakr",
     "customerId": 4,
-    "rewordPoints": {
-      "2025-Jun": 230
-    },
+    "transactionList": null,
+    "rewordPoints": [
+      {
+        "Jun": 230
+      }
+    ],
     "totalSumOfAllRewards": 230
   },
   {
     "customerName": "Akhilesh Magdum",
     "customerId": 2,
-    "rewordPoints": {
-      "2025-May": 90,
-      "2025-Jun": 110,
-      "2025-Apr": 230
-    },
+    "transactionList": null,
+    "rewordPoints": [
+      {
+        "Jun": 110
+      },
+      {
+        "Apr": 230
+      },
+      {
+        "May": 90
+      }
+    ],
     "totalSumOfAllRewards": 430
   },
   {
     "customerName": "Sunil Karde",
     "customerId": 6,
-    "rewordPoints": {
-      "2025-Jun": 110
-    },
+    "transactionList": null,
+    "rewordPoints": [
+      {
+        "Jun": 110
+      }
+    ],
     "totalSumOfAllRewards": 110
   }
 ]

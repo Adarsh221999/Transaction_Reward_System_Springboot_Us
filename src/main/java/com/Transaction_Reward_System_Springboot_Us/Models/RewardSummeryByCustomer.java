@@ -21,10 +21,19 @@ public class RewardSummeryByCustomer {
     private Long totalSumOfAllRewards;
 
 
-    public RewardSummeryByCustomer(String customerName, Set<Map.Entry<String, Integer>> rewordPoints, Long customerId) {
+//    public RewardSummeryByCustomer(String customerName, Set<Map.Entry<String, Integer>> rewordPoints, Long customerId) {
+//        this.customerName = customerName;
+//        this.rewordPoints = rewordPoints;
+//        this.customerId = customerId;
+//    }
+
+
+    public RewardSummeryByCustomer(String customerName, Long customerId, List<Rewards> transactionList, Set<Map.Entry<String, Integer>> rewordPoints, Long totalSumOfAllRewards) {
         this.customerName = customerName;
-        this.rewordPoints = rewordPoints;
         this.customerId = customerId;
+        this.transactionList = transactionList;
+        this.rewordPoints = rewordPoints;
+        this.totalSumOfAllRewards = totalSumOfAllRewards;
     }
 
     @Override
