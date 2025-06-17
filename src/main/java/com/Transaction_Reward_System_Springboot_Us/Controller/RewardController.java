@@ -16,26 +16,26 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reword")
-public class RewordController {
+@RequestMapping("/reward")
+public class RewardController {
 
     @Autowired
-    RewardsServiceImpl rewordsService;
+    RewardsServiceImpl rewardsService;
 
-    private static final Logger logger = LoggerFactory.getLogger(RewordController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RewardController.class);
 
     /*
     Controller endpoint for adding reword
     Request Body Contains the user request body for adding reword.
     */
-    @PostMapping (value = "/addReword")
+    @PostMapping (value = "/addReward")
     public ResponseEntity<?> addReword(@Valid @RequestBody Rewards request){
-        Rewards rewords = null;
+        Rewards rewards = null;
         try {
             logger.info("Received request to add reward: {}", request);
-            rewords = rewordsService.addRewardPoints(request);
+            rewards = rewardsService.addRewardPoints(request);
             logger.info("Completed request to add reward: {}", request);
-            return new ResponseEntity<>(rewords, HttpStatus.OK);
+            return new ResponseEntity<>(rewards, HttpStatus.OK);
         }
         catch (Exception e){
             logger.warn("Received Waring while request to add reward: {}", request);
@@ -49,7 +49,7 @@ public class RewordController {
       Controller endpoint for getting reword points summery by month for given customer id.
     * @Pathvariable CustomerId coming for user request.
     */
-    @GetMapping(value = "/getRewordsByMonth/{CustomerId}")
+    @GetMapping(value = "/getRewardsByMonth/{CustomerId}")
     public ResponseEntity<?> getRewordPointsSummery(
             @Valid @PathVariable Long CustomerId,
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate StartDate,
@@ -61,7 +61,7 @@ public class RewordController {
 
         try {
             logger.info("Received request to get All reword by Month CustomerId: {}", CustomerId);
-            summery = rewordsService.findRewardSummeryMonthlyByCustomerId(CustomerId,StartDate,EndDate);
+            summery = rewardsService.findRewardSummeryMonthlyByCustomerId(CustomerId,StartDate,EndDate);
             logger.info("Completed request to get All reword by Month CustomerId: {}", CustomerId);
 
             return new ResponseEntity<>(summery, HttpStatus.OK);
@@ -77,17 +77,17 @@ public class RewordController {
     Controller endpoint for getting rewordpoints summery for last 3 months.
     * Do not take any argument.
     */
-        @GetMapping(value = "/getThreeMonthsRewordsSummeryForAllCustomer")
-        public ResponseEntity<?> getThreeMonthsRewordsSummeryForAllCustomer
+        @GetMapping(value = "/getThreeMonthsrewardsSummeryForAllCustomer")
+        public ResponseEntity<?> getThreeMonthsrewardsSummeryForAllCustomer
         (
          @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate StartDate,
          @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate EndDate
          ) {
 
-           // RewordSummeryByCustomer summeryThreeMonths = null;
+           // rewardsummeryByCustomer summeryThreeMonths = null;
             try {
                 logger.info("Received request to get All reword summery for three months by each customer: {}");
-                List<RewardSummeryByCustomer> threeMontsSummmery = rewordsService.getRewardsummeryForLastThreeMonth(StartDate ,EndDate );
+                List<RewardSummeryByCustomer> threeMontsSummmery = rewardsService.getRewardsummeryForLastThreeMonth(StartDate ,EndDate );
                 logger.info("Received request to get All reword summery for three months by each customer:{}");
 
                 return new ResponseEntity<>(threeMontsSummmery, HttpStatus.OK);

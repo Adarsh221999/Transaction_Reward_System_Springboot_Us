@@ -36,7 +36,7 @@ public class Rewards {
 
    @ManyToOne
    @JoinColumn(name = "customer_id")
-    private Customer customer;
+   private Customer customer;
 
     public Rewards() {}
 

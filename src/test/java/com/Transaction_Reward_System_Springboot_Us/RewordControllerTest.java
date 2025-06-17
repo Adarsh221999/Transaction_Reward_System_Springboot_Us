@@ -1,5 +1,5 @@
 package com.Transaction_Reward_System_Springboot_Us;
-import com.Transaction_Reward_System_Springboot_Us.Controller.RewordController;
+import com.Transaction_Reward_System_Springboot_Us.Controller.RewardController;
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
 import com.Transaction_Reward_System_Springboot_Us.Models.RewardSummeryByCustomer;
 import com.Transaction_Reward_System_Springboot_Us.Service.RewardsServiceImpl;
@@ -31,7 +31,7 @@ class RewordControllerTest {
 
     //Injecting into the Conroller Layer All Other Mocks.
     @InjectMocks
-    private RewordController rewordController;
+    private RewardController rewardController;
 
     //Mock Mvc For Simulation of Http Calls Mocking
     private MockMvc mockMvc;
@@ -40,7 +40,7 @@ class RewordControllerTest {
     // Setup for the Mocking
     @BeforeEach
     void setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(rewordController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(rewardController).build();
     }
 
      /*
