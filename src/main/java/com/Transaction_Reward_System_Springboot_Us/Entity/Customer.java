@@ -21,10 +21,6 @@ public class Customer {
     @NotNull
     String customerName;
 
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    List<Rewards> rewords = new ArrayList<>();
-
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
