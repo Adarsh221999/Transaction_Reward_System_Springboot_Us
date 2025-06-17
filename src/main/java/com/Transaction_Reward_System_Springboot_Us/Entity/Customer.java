@@ -21,18 +21,19 @@ public class Customer {
     @NotNull
     String customerName;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<Rewards> rewords = new ArrayList<>();
+//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    List<Rewards> rewords = new ArrayList<>();
+
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(customerName, customer.customerName) && Objects.equals(rewords, customer.rewords);
+        return Objects.equals(id, customer.id) && Objects.equals(customerName, customer.customerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerName, rewords);
+        return Objects.hash(id, customerName);
     }
 }

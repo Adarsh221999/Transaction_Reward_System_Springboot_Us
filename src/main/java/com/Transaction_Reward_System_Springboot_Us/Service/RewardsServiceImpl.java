@@ -121,7 +121,7 @@ public class RewardsServiceImpl implements RewardOperations {
             summery.setCustomerId(repo.findByCustomerId(customerId).getFirst().getCustomer().getId());
             summery.setCustomerName(repo.findByCustomerId(customerId).getFirst().getCustomerName());
             summery.setRewordPoints(listOfRewardPointsByMonth);
-
+            summery.setTransactionList(allRewards);
             loggerRewardservice.info("Getting Rewards by CustomerId By Month And Total  "+ customerId+"Completed");
             return summery;
 

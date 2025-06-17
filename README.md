@@ -162,7 +162,41 @@ GET http://localhost:8084/reword/getRewordsByMonth/2?startDate=2025-03-01&endDat
 {
   "customerName": "Akhilesh Magdum",
   "customerId": 2,
-  "transactionList": null,
+  "transactionList": [
+    {
+      "transactionId": 2,
+      "date": "2025-04-17",
+      "customerName": "Akhilesh Magdum",
+      "transactionAmount": 190.0,
+      "rewardPoints": 230,
+      "customer": {
+        "id": 2,
+        "customerName": "Akhilesh Magdum"
+      }
+    },
+    {
+      "transactionId": 3,
+      "date": "2025-05-17",
+      "customerName": "Akhilesh Magdum",
+      "transactionAmount": 120.0,
+      "rewardPoints": 90,
+      "customer": {
+        "id": 2,
+        "customerName": "Akhilesh Magdum"
+      }
+    },
+    {
+      "transactionId": 4,
+      "date": "2025-06-17",
+      "customerName": "Akhilesh Magdum",
+      "transactionAmount": 130.0,
+      "rewardPoints": 110,
+      "customer": {
+        "id": 2,
+        "customerName": "Akhilesh Magdum"
+      }
+    }
+  ],
   "rewordPoints": [
     {
       "Jun": 110
@@ -195,7 +229,19 @@ GET http://localhost:8084/reword/getThreeMonthsRewordsSummeryForAllCustomer?star
   {
     "customerName": "Adarsh Chimgaonakr",
     "customerId": 4,
-    "transactionList": null,
+    "transactionList": [
+      {
+        "transactionId": 1,
+        "date": "2025-06-17",
+        "customerName": "Adarsh Chimgaonakr",
+        "transactionAmount": 190.0,
+        "rewardPoints": 230,
+        "customer": {
+          "id": 4,
+          "customerName": "Adarsh Chimgaonkar"
+        }
+      }
+    ],
     "rewordPoints": [
       {
         "Jun": 230
@@ -206,7 +252,41 @@ GET http://localhost:8084/reword/getThreeMonthsRewordsSummeryForAllCustomer?star
   {
     "customerName": "Akhilesh Magdum",
     "customerId": 2,
-    "transactionList": null,
+    "transactionList": [
+      {
+        "transactionId": 2,
+        "date": "2025-04-17",
+        "customerName": "Akhilesh Magdum",
+        "transactionAmount": 190.0,
+        "rewardPoints": 230,
+        "customer": {
+          "id": 2,
+          "customerName": "Akhilesh Magdum"
+        }
+      },
+      {
+        "transactionId": 3,
+        "date": "2025-05-17",
+        "customerName": "Akhilesh Magdum",
+        "transactionAmount": 120.0,
+        "rewardPoints": 90,
+        "customer": {
+          "id": 2,
+          "customerName": "Akhilesh Magdum"
+        }
+      },
+      {
+        "transactionId": 4,
+        "date": "2025-06-17",
+        "customerName": "Akhilesh Magdum",
+        "transactionAmount": 130.0,
+        "rewardPoints": 110,
+        "customer": {
+          "id": 2,
+          "customerName": "Akhilesh Magdum"
+        }
+      }
+    ],
     "rewordPoints": [
       {
         "Jun": 110
@@ -223,7 +303,19 @@ GET http://localhost:8084/reword/getThreeMonthsRewordsSummeryForAllCustomer?star
   {
     "customerName": "Sunil Karde",
     "customerId": 6,
-    "transactionList": null,
+    "transactionList": [
+      {
+        "transactionId": 5,
+        "date": "2025-06-17",
+        "customerName": "Sunil Karde",
+        "transactionAmount": 130.0,
+        "rewardPoints": 110,
+        "customer": {
+          "id": 6,
+          "customerName": "Sunil Karde"
+        }
+      }
+    ],
     "rewordPoints": [
       {
         "Jun": 110
