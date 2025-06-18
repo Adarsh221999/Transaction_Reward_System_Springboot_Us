@@ -1,4 +1,4 @@
-package com.Transaction_Reward_System_Springboot_Us.Entity;
+package com.Transaction_Reward.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;

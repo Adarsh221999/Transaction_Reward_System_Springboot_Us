@@ -1,8 +1,8 @@
-package com.Transaction_Reward_System_Springboot_Us;
+package com.Transaction_Reward;
 
 
-import com.Transaction_Reward_System_Springboot_Us.Repository.RewardsRepo;
-import com.Transaction_Reward_System_Springboot_Us.Service.RewardsServiceImpl;
+import com.Transaction_Reward.Repository.RewardsRepo;
+import com.Transaction_Reward.Service.RewardsServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;

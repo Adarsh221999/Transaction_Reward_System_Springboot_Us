@@ -1,9 +1,9 @@
-package com.Transaction_Reward_System_Springboot_Us.Controller;
+package com.Transaction_Reward.Controller;
 
-import com.Transaction_Reward_System_Springboot_Us.Entity.Customer;
-import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
-import com.Transaction_Reward_System_Springboot_Us.Service.CustomerServiceImpl;
-import com.Transaction_Reward_System_Springboot_Us.Service.RewardsServiceImpl;
+import com.Transaction_Reward.Entity.Customer;
+import com.Transaction_Reward.Entity.Rewards;
+import com.Transaction_Reward.Exception.TransactionFailed;
+import com.Transaction_Reward.Service.CustomerServiceImpl;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class CustomerController {
     Request Body Contains the user request body for adding reword.
     */
     @PostMapping(value = "/createCustomer")
-    public ResponseEntity<?> addCustomer(@Valid @RequestBody Customer request ,@RequestParam String customerName ){
+    public ResponseEntity<Customer> addCustomer(@Valid @RequestBody Customer request ,@RequestParam String customerName ){
         Rewards rewords = null;
         try {
             logger.info("Adding customer in progress: {}", request);
@@ -37,7 +37,7 @@ public class CustomerController {
         }
         catch (Exception e){
             logger.warn("Adding customer in progress: {}", request);
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+            throw new TransactionFailed("User Creation Failed");
 
         }
 

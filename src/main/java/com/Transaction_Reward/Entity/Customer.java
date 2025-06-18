@@ -1,4 +1,4 @@
-package com.Transaction_Reward_System_Springboot_Us.Entity;
+package com.Transaction_Reward.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

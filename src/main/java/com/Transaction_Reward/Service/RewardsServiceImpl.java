@@ -1,10 +1,10 @@
-package com.Transaction_Reward_System_Springboot_Us.Service;
+package com.Transaction_Reward.Service;
 
-import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
-import com.Transaction_Reward_System_Springboot_Us.Exception.*;
-import com.Transaction_Reward_System_Springboot_Us.Models.RewardSummeryByCustomer;
-import com.Transaction_Reward_System_Springboot_Us.Repository.CustomerRepo;
-import com.Transaction_Reward_System_Springboot_Us.Repository.RewardsRepo;
+import com.Transaction_Reward.Entity.Rewards;
+import com.Transaction_Reward.Exception.*;
+import com.Transaction_Reward.Models.RewardSummeryByCustomer;
+import com.Transaction_Reward.Repository.CustomerRepo;
+import com.Transaction_Reward.Repository.RewardsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,6 @@ public class RewardsServiceImpl implements RewardOperations {
 
     @Autowired
     private CustomerRepo customerRepo;
-
 
     private static final Logger loggerRewardservice = LoggerFactory.getLogger(RewardsServiceImpl.class);
 
@@ -106,7 +105,7 @@ public class RewardsServiceImpl implements RewardOperations {
                allRewards = repo.findByCustomerId(customerId);
           }
           catch (CustomerNotFoundException e){
-              System.out.println(e.getMessage());
+              throw e;
           }
             if (allRewards.isEmpty())
             {

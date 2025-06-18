@@ -1,8 +1,8 @@
-package com.Transaction_Reward_System_Springboot_Us.Service;
+package com.Transaction_Reward.Service;
 
-import com.Transaction_Reward_System_Springboot_Us.Entity.Customer;
-import com.Transaction_Reward_System_Springboot_Us.Exception.CustomerAlreadyExists;
-import com.Transaction_Reward_System_Springboot_Us.Repository.CustomerRepo;
+import com.Transaction_Reward.Entity.Customer;
+import com.Transaction_Reward.Exception.CustomerAlreadyExists;
+import com.Transaction_Reward.Repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

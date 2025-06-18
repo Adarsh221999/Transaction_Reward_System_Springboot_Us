@@ -1,7 +1,7 @@
-package com.Transaction_Reward_System_Springboot_Us.Service;
+package com.Transaction_Reward.Service;
 
-import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
-import com.Transaction_Reward_System_Springboot_Us.Models.RewardSummeryByCustomer;
+import com.Transaction_Reward.Entity.Rewards;
+import com.Transaction_Reward.Models.RewardSummeryByCustomer;
 
 import java.time.LocalDate;
 import java.util.List;

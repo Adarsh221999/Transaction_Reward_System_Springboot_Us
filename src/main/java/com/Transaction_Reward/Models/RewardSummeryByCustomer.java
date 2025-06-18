@@ -1,4 +1,4 @@
-package com.Transaction_Reward_System_Springboot_Us.Models;
+package com.Transaction_Reward.Models;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,7 @@
 // ================================
 // CustomerNotFoundException.java
 // ================================
-package com.Transaction_Reward_System_Springboot_Us.Exception;
+package com.Transaction_Reward.Exception;
 
 /**
  * Exception thrown when customer ID is not found in database.
