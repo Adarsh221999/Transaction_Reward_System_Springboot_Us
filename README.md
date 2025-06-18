@@ -275,7 +275,7 @@ GET http://localhost:8084/reword/getThreeMonthsRewordsSummeryForAllCustomer?star
   }
 ]
 ```
-
+#### 8. Add  Customers
 ```
 http://localhost:8084/customer/createCustomer?customerName=Shivaji Karde
 ```
