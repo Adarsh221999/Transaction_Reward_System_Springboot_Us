@@ -161,51 +161,32 @@ GET http://localhost:8084/reword/getRewordsByMonth/2?startDate=2025-03-01&endDat
 ```json
 {
   "customerName": "Akhilesh Magdum",
-  "customerId": 2,
   "transactionList": [
     {
-      "transactionId": 2,
-      "date": "2025-04-17",
-      "customerName": "Akhilesh Magdum",
-      "transactionAmount": 190.0,
-      "rewardPoints": 230,
-      "customer": {
-        "id": 2,
-        "customerName": "Akhilesh Magdum"
-      }
+      "Amount": 190.0,
+      "TransactionId": 2
     },
     {
-      "transactionId": 3,
-      "date": "2025-05-17",
-      "customerName": "Akhilesh Magdum",
-      "transactionAmount": 120.0,
-      "rewardPoints": 90,
-      "customer": {
-        "id": 2,
-        "customerName": "Akhilesh Magdum"
-      }
+      "Amount": 120.0,
+      "TransactionId": 3
     },
     {
-      "transactionId": 4,
-      "date": "2025-06-17",
-      "customerName": "Akhilesh Magdum",
-      "transactionAmount": 130.0,
-      "rewardPoints": 110,
-      "customer": {
-        "id": 2,
-        "customerName": "Akhilesh Magdum"
-      }
+      "Amount": 130.0,
+      "TransactionId": 4
     }
   ],
   "rewordPoints": [
     {
-      "Jun": 110
+      "Points:": 110,
+      "Month:": "Jun"
     },
     {
-      "Apr": 230
+      "Points:": 230,
+      "Month:": "Apr"
     },
     {
-      "May": 90
+      "Points:": 90,
+      "Month:": "May"
     }
   ],
   "totalSumOfAllRewards": 430
@@ -228,100 +209,91 @@ GET http://localhost:8084/reword/getThreeMonthsRewordsSummeryForAllCustomer?star
 [
   {
     "customerName": "Adarsh Chimgaonakr",
-    "customerId": 4,
     "transactionList": [
       {
-        "transactionId": 1,
-        "date": "2025-06-17",
-        "customerName": "Adarsh Chimgaonakr",
-        "transactionAmount": 190.0,
-        "rewardPoints": 230,
-        "customer": {
-          "id": 4,
-          "customerName": "Adarsh Chimgaonkar"
-        }
+        "Amount": 190.0,
+        "TransactionId": 1
       }
     ],
     "rewordPoints": [
       {
-        "Jun": 230
+        "Points:": 230,
+        "Month:": "Jun"
       }
     ],
     "totalSumOfAllRewards": 230
   },
   {
     "customerName": "Akhilesh Magdum",
-    "customerId": 2,
     "transactionList": [
       {
-        "transactionId": 2,
-        "date": "2025-04-17",
-        "customerName": "Akhilesh Magdum",
-        "transactionAmount": 190.0,
-        "rewardPoints": 230,
-        "customer": {
-          "id": 2,
-          "customerName": "Akhilesh Magdum"
-        }
+        "Amount": 190.0,
+        "TransactionId": 2
       },
       {
-        "transactionId": 3,
-        "date": "2025-05-17",
-        "customerName": "Akhilesh Magdum",
-        "transactionAmount": 120.0,
-        "rewardPoints": 90,
-        "customer": {
-          "id": 2,
-          "customerName": "Akhilesh Magdum"
-        }
+        "Amount": 120.0,
+        "TransactionId": 3
       },
       {
-        "transactionId": 4,
-        "date": "2025-06-17",
-        "customerName": "Akhilesh Magdum",
-        "transactionAmount": 130.0,
-        "rewardPoints": 110,
-        "customer": {
-          "id": 2,
-          "customerName": "Akhilesh Magdum"
-        }
+        "Amount": 130.0,
+        "TransactionId": 4
       }
     ],
     "rewordPoints": [
       {
-        "Jun": 110
+        "Points:": 110,
+        "Month:": "Jun"
       },
       {
-        "Apr": 230
+        "Points:": 230,
+        "Month:": "Apr"
       },
       {
-        "May": 90
+        "Points:": 90,
+        "Month:": "May"
       }
     ],
     "totalSumOfAllRewards": 430
   },
   {
     "customerName": "Sunil Karde",
-    "customerId": 6,
     "transactionList": [
       {
-        "transactionId": 5,
-        "date": "2025-06-17",
-        "customerName": "Sunil Karde",
-        "transactionAmount": 130.0,
-        "rewardPoints": 110,
-        "customer": {
-          "id": 6,
-          "customerName": "Sunil Karde"
-        }
+        "Amount": 130.0,
+        "TransactionId": 5
       }
     ],
     "rewordPoints": [
       {
-        "Jun": 110
+        "Points:": 110,
+        "Month:": "Jun"
       }
     ],
     "totalSumOfAllRewards": 110
+  },
+  {
+    "customerName": "Shivaji Karde",
+    "transactionList": [
+      {
+        "Amount": 130.0,
+        "TransactionId": 6
+      },
+      {
+        "Amount": 130.0,
+        "TransactionId": 7
+      },
+      {
+        "Amount": 130.0,
+        "TransactionId": 8
+      }
+    ],
+    "rewordPoints": [
+      {
+        "Points:": 330,
+        "Month:": "Jun"
+      }
+    ],
+    "totalSumOfAllRewards": 330
   }
 ]
 ```
