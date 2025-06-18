@@ -15,22 +15,12 @@ import java.util.Set;
 public class RewardSummeryByCustomer {
 
     private String  customerName;
-    private Long customerId;
-    private List<Rewards> transactionList;
-    private Set<Map.Entry<String, Integer>>rewordPoints;
+    private List<Map<String,Object>> transactionList;
+    private List<Map<String,Object>>rewordPoints;
     private Long totalSumOfAllRewards;
 
-
-//    public RewardSummeryByCustomer(String customerName, Set<Map.Entry<String, Integer>> rewordPoints, Long customerId) {
-//        this.customerName = customerName;
-//        this.rewordPoints = rewordPoints;
-//        this.customerId = customerId;
-//    }
-
-
-    public RewardSummeryByCustomer(String customerName, Long customerId, List<Rewards> transactionList, Set<Map.Entry<String, Integer>> rewordPoints, Long totalSumOfAllRewards) {
+    public RewardSummeryByCustomer(String  customerName,List<Map<String,Object>> transactionList, List<Map<String,Object>> rewordPoints, Long totalSumOfAllRewards) {
         this.customerName = customerName;
-        this.customerId = customerId;
         this.transactionList = transactionList;
         this.rewordPoints = rewordPoints;
         this.totalSumOfAllRewards = totalSumOfAllRewards;
@@ -38,10 +28,11 @@ public class RewardSummeryByCustomer {
 
     @Override
     public String toString() {
-        return "RewordSummeryByCustomer{" +
+        return "RewardSummeryByCustomer{" +
                 "customerName='" + customerName + '\'' +
+                ", transactionList=" + transactionList +
                 ", rewordPoints=" + rewordPoints +
-                ", customerId=" + customerId +
+                ", totalSumOfAllRewards=" + totalSumOfAllRewards +
                 '}';
     }
 
@@ -51,11 +42,14 @@ public class RewardSummeryByCustomer {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         RewardSummeryByCustomer that = (RewardSummeryByCustomer) o;
-        return Objects.equals(customerName, that.customerName) && Objects.equals(rewordPoints, that.rewordPoints) && Objects.equals(customerId, that.customerId);
+        return Objects.equals(transactionList, that.transactionList) && Objects.equals(rewordPoints, that.rewordPoints) && Objects.equals(totalSumOfAllRewards, that.totalSumOfAllRewards);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerName, rewordPoints, customerId);
+        return Objects.hash(transactionList, rewordPoints, totalSumOfAllRewards);
     }
+
+
+
 }

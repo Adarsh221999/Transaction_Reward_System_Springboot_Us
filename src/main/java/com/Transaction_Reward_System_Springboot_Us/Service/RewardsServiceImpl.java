@@ -96,12 +96,12 @@ public class RewardsServiceImpl implements RewardOperations {
     public RewardSummeryByCustomer findRewardSummeryMonthlyByCustomerId(Long customerId, LocalDate StartDate, LocalDate EndDate) {
         RewardSummeryByCustomer summery = new RewardSummeryByCustomer();
         List<Rewards> allRewards=new ArrayList<Rewards>();
-        List<Rewards> transactionRecords=new ArrayList<Rewards>();
+        List<Map<String,Object>> transactionRecords=new ArrayList<>();
 
         try
         {
             loggerRewardservice.info("Getting Rewards by CustomerId By Month And Total  "+ customerId);
-            long totalPoints= 0L;
+            long totalPoints=0L;
 
           try {
                allRewards = repo.findByCustomerId(customerId);
@@ -116,12 +116,24 @@ public class RewardsServiceImpl implements RewardOperations {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM", Locale.ENGLISH);
             totalPoints=allRewards.stream().mapToLong(Rewards::getRewardPoints).sum();
             summery.setTotalSumOfAllRewards(totalPoints);
+            List<Map<String,Object>> rewordsSummery= new ArrayList<Map<String,Object>>();
             Map<String, Integer>RewardsByMonth = allRewards.stream().collect(Collectors.groupingBy(Rewords->(Rewords.getDate().format(formatter)),Collectors.summingInt(points->points.getRewardPoints().intValue())));
-            Set<Map.Entry<String,Integer>> listOfRewardPointsByMonth= RewardsByMonth.entrySet();
-            summery.setCustomerId(repo.findByCustomerId(customerId).getFirst().getCustomer().getId());
-            summery.setCustomerName(repo.findByCustomerId(customerId).getFirst().getCustomerName());
-            summery.setRewordPoints(listOfRewardPointsByMonth);
-            summery.setTransactionList(allRewards);
+
+            for (Map.Entry<String,Integer> record : RewardsByMonth.entrySet()){
+                Map<String,Object> rewardEntry = new HashMap<>();
+                rewardEntry.put("Points:",record.getValue());
+                rewardEntry.put("Month:",record.getKey());
+                rewordsSummery.add(rewardEntry);
+            }
+            for (Rewards reward : allRewards){
+                  Map<String,Object> transactions=new HashMap<>();
+                  transactions.put("Amount",reward.getTransactionAmount());
+                  transactions.put("TransactionId",reward.getTransactionId());
+                  transactionRecords.add(transactions);
+            }
+            summery.setRewordPoints(rewordsSummery);
+            summery.setTransactionList(transactionRecords);
+            summery.setCustomerName(allRewards.getLast().getCustomerName());
             loggerRewardservice.info("Getting Rewards by CustomerId By Month And Total  "+ customerId+"Completed");
             return summery;
 

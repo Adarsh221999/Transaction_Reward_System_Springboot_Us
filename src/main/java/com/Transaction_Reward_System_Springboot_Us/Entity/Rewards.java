@@ -34,7 +34,7 @@ public class Rewards {
     @Column
     private Long rewardPoints;
 
-   @ManyToOne
+   @ManyToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "customer_id")
      private Customer customer;
 
