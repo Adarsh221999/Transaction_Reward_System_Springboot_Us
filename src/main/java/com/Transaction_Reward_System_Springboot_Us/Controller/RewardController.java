@@ -1,6 +1,7 @@
 package com.Transaction_Reward_System_Springboot_Us.Controller;
 
 import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
+import com.Transaction_Reward_System_Springboot_Us.Exception.RewordTransactionNotFound;
 import com.Transaction_Reward_System_Springboot_Us.Models.RewardSummeryByCustomer;
 import com.Transaction_Reward_System_Springboot_Us.Service.RewardsServiceImpl;
 import jakarta.validation.Valid;
@@ -29,7 +30,7 @@ public class RewardController {
     Request Body Contains the user request body for adding reword.
     */
     @PostMapping (value = "/addReward")
-    public ResponseEntity<?> addReword(@Valid @RequestBody Rewards request){
+    public ResponseEntity<Rewards> addReword(@Valid @RequestBody Rewards request){
         Rewards rewards = null;
         try {
             logger.info("Received request to add reward: {}", request);
@@ -39,7 +40,8 @@ public class RewardController {
         }
         catch (Exception e){
             logger.warn("Received Waring while request to add reward: {}", request);
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+            throw new RewordTransactionNotFound("Failed to Generate reward transaction ");
+
 
         }
 
@@ -50,15 +52,13 @@ public class RewardController {
     * @Pathvariable CustomerId coming for user request.
     */
     @GetMapping(value = "/getRewardsByMonth/{CustomerId}")
-    public ResponseEntity<?> getRewordPointsSummery(
+    public ResponseEntity<RewardSummeryByCustomer> getRewordPointsSummery(
             @Valid @PathVariable Long CustomerId,
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate StartDate,
             @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate EndDate
             )
     {
-
         RewardSummeryByCustomer summery = null;
-
         try {
             logger.info("Received request to get All reword by Month CustomerId: {}", CustomerId);
             summery = rewardsService.findRewardSummeryMonthlyByCustomerId(CustomerId,StartDate,EndDate);
@@ -67,7 +67,8 @@ public class RewardController {
             return new ResponseEntity<>(summery, HttpStatus.OK);
         } catch (Exception e) {
             logger.warn("Exception while request to get All reword by Month CustomerId: {}", CustomerId);
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            throw new RewordTransactionNotFound("Failed to Generate reward transaction Summery");
+
 
         }
 
@@ -78,22 +79,21 @@ public class RewardController {
     * Do not take any argument.
     */
         @GetMapping(value = "/getThreeMonthsrewardsSummeryForAllCustomer")
-        public ResponseEntity<?> getThreeMonthsrewardsSummeryForAllCustomer
+        public ResponseEntity<List<RewardSummeryByCustomer>> getThreeMonthsrewardsSummeryForAllCustomer
         (
          @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate StartDate,
          @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate EndDate
          ) {
 
-           // rewardsummeryByCustomer summeryThreeMonths = null;
             try {
-                logger.info("Received request to get All reword summery for three months by each customer: {}");
-                List<RewardSummeryByCustomer> threeMontsSummmery = rewardsService.getRewardsummeryForLastThreeMonth(StartDate ,EndDate );
-                logger.info("Received request to get All reword summery for three months by each customer:{}");
+                logger.info("Received request to get All reword summery for three months by each customer: {1}");
+                List<RewardSummeryByCustomer> threeMonthsSummery = rewardsService.getRewardsummeryForLastThreeMonth(StartDate ,EndDate );
+                logger.info("Received request to get All reword summery for three months by each customer:{1}");
 
-                return new ResponseEntity<>(threeMontsSummmery, HttpStatus.OK);
+                return new ResponseEntity<>(threeMonthsSummery, HttpStatus.OK);
             } catch (Exception e) {
-                logger.warn("Exception while getting all reword by customerId for three months: {}");
-                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+                logger.warn("Exception while getting all reword by customerId for three months: {1}");
+                throw new RewordTransactionNotFound("Failed to Generate reward transaction ");
 
             }
 
