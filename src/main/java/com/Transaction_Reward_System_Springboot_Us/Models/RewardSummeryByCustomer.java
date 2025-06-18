@@ -12,13 +12,13 @@ public class RewardSummeryByCustomer {
 
     private String  customerName;
     private List<Map<String,Object>> transactionList;
-    private List<Map<String,Object>>rewordPoints;
+    private List<Map<String,Object>>rewardPoints;
     private Long totalSumOfAllRewards;
 
     public RewardSummeryByCustomer(String  customerName,List<Map<String,Object>> transactionList, List<Map<String,Object>> rewordPoints, Long totalSumOfAllRewards) {
         this.customerName = customerName;
         this.transactionList = transactionList;
-        this.rewordPoints = rewordPoints;
+        this.rewardPoints = rewordPoints;
         this.totalSumOfAllRewards = totalSumOfAllRewards;
     }
 
@@ -27,7 +27,7 @@ public class RewardSummeryByCustomer {
         return "RewardSummeryByCustomer{" +
                 "customerName='" + customerName + '\'' +
                 ", transactionList=" + transactionList +
-                ", rewordPoints=" + rewordPoints +
+                ", rewordPoints=" + rewardPoints +
                 ", totalSumOfAllRewards=" + totalSumOfAllRewards +
                 '}';
     }
@@ -38,12 +38,12 @@ public class RewardSummeryByCustomer {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         RewardSummeryByCustomer that = (RewardSummeryByCustomer) o;
-        return Objects.equals(transactionList, that.transactionList) && Objects.equals(rewordPoints, that.rewordPoints) && Objects.equals(totalSumOfAllRewards, that.totalSumOfAllRewards);
+        return Objects.equals(transactionList, that.transactionList) && Objects.equals(rewardPoints, that.rewardPoints) && Objects.equals(totalSumOfAllRewards, that.totalSumOfAllRewards);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionList, rewordPoints, totalSumOfAllRewards);
+        return Objects.hash(transactionList, rewardPoints, totalSumOfAllRewards);
     }
 
 }
