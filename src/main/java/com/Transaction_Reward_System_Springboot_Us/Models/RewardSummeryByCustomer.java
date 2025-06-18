@@ -50,6 +50,4 @@ public class RewardSummeryByCustomer {
         return Objects.hash(transactionList, rewordPoints, totalSumOfAllRewards);
     }
 
-
-
 }
