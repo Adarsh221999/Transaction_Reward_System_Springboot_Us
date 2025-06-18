@@ -101,7 +101,6 @@ public class RewardsServiceImpl implements RewardOperations {
         try
         {
             loggerRewardservice.info("Getting Rewards by CustomerId By Month And Total  "+ customerId);
-            long totalPoints=0L;
 
           try {
                allRewards = repo.findByCustomerId(customerId);
@@ -114,7 +113,7 @@ public class RewardsServiceImpl implements RewardOperations {
                 throw new  CustomerNotFoundException("No Customer with the id "+customerId);
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM", Locale.ENGLISH);
-            totalPoints=allRewards.stream().mapToLong(Rewards::getRewardPoints).sum();
+            long totalPoints= allRewards.stream().mapToLong(Rewards::getRewardPoints).sum();
             summery.setTotalSumOfAllRewards(totalPoints);
             List<Map<String,Object>> rewordsSummery= new ArrayList<Map<String,Object>>();
             Map<String, Integer>RewardsByMonth = allRewards.stream().collect(Collectors.groupingBy(Rewords->(Rewords.getDate().format(formatter)),Collectors.summingInt(points->points.getRewardPoints().intValue())));
@@ -148,17 +147,17 @@ public class RewardsServiceImpl implements RewardOperations {
     Method for the calculation for the reword points by transaction amount.
      */
     private static Long calculateRewardsPoints(Double amount) {
-        long calculated_Reword_Points = 0;
+        long total_Reword_Points = 0;
         try {
             loggerRewardservice.info("Getting Rewards Calculated By Amount "+ amount + "Started");
             long transaction_amount = Math.round(amount);
 
             if (transaction_amount > 100) {
-                calculated_Reword_Points += (transaction_amount - 100) * 2 + (50);
+                total_Reword_Points += (transaction_amount - 100) * 2 + (50);
             } else if (transaction_amount > 50 && transaction_amount < 100) {
-                calculated_Reword_Points = (transaction_amount - 50);
+                total_Reword_Points = (transaction_amount - 50);
             } else {
-               return calculated_Reword_Points;
+               return total_Reword_Points;
             }
 
             loggerRewardservice.info("Getting Rewards Calculated By Amount "+ amount + "Completed");
@@ -169,7 +168,7 @@ public class RewardsServiceImpl implements RewardOperations {
             throw e;
         }
 
-        return calculated_Reword_Points;
+        return total_Reword_Points;
     }
 
     /*
