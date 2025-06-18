@@ -1,14 +1,10 @@
 package com.Transaction_Reward_System_Springboot_Us.Models;
 
-import com.Transaction_Reward_System_Springboot_Us.Entity.Rewards;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
