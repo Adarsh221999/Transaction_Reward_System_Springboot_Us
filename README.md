@@ -61,32 +61,10 @@ cd Transaction_Reward_System_Springboot_Us
 
 ---
 
-#### 2. Sample: Get Reward Summary by Customer ID (GET)
-
 **Endpoint:**
-
-```
-GET http://localhost:8085/rewords/getRewordsByMonth/10
-```
-
-**Response:**
-
-```json
-{
-  "customerName": "Akhilesh Magdum",
-  "customerId": 2,
-  "rewordPoints": {
-    "2025-May": 90,
-    "2025-Jun": 110,
-    "2025-Apr": 230
-  },
-  "totalSumOfAllRewards": 430
-}
-```
-
 ---
 
-#### 3. Add Reward (POST)
+#### 2. Add Reward (POST)
 
 **Endpoint:**
 
@@ -296,6 +274,21 @@ GET http://localhost:8084/reword/getThreeMonthsRewordsSummeryForAllCustomer?star
     "totalSumOfAllRewards": 330
   }
 ]
+```
+
+```
+http://localhost:8084/customer/createCustomer?customerName=Shivaji Karde
+```
+```Request- Json
+{
+"customerName":"Shivaji Karde"
+}
+```
+```Response 
+{
+    "id": 7,
+    "customerName": "Shivaji Karde"
+}
 ```
 
 ---
