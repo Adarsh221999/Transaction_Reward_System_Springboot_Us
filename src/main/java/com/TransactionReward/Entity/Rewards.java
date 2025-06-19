@@ -1,4 +1,4 @@
-package com.Transaction_Reward.Entity;
+package com.TransactionReward.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -34,7 +34,7 @@ public class Rewards {
     @Column
     private Long rewardPoints;
 
-   @ManyToOne(cascade = CascadeType.ALL)
+   @ManyToOne(cascade = CascadeType.MERGE)
    @JoinColumn(name = "customer_id")
      private Customer customer;
 

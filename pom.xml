@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.Tranzaction_Reward_System_Springboot_Us</groupId>
-	<artifactId>Transaction_Reward_System_Springboot_Us</artifactId>
+	<artifactId>TransactionRewardSystemSpringbootUs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Tranzaction_Reward_System_Springboot_Us</name>
 	<description>Demo project for Spring Boot</description>

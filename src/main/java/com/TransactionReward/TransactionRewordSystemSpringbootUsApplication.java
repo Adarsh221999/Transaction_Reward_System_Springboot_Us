@@ -1,10 +1,10 @@
-package com.Transaction_Reward;
+package com.TransactionReward;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-@SpringBootApplication(scanBasePackages = "com.Transaction_Reward")
+@SpringBootApplication(scanBasePackages = "com.TransactionReward")
 public class TransactionRewordSystemSpringbootUsApplication {
 
 	public static void main(String[] args) {

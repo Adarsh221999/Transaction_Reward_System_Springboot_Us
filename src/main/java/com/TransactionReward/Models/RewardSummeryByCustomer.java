@@ -1,4 +1,4 @@
-package com.Transaction_Reward.Models;
+package com.TransactionReward.Models;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.Transaction_Reward.Entity;
+package com.TransactionReward.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

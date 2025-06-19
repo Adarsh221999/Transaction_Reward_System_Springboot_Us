@@ -1,9 +1,9 @@
-package com.Transaction_Reward.Controller;
+package com.TransactionReward.Controller;
 
-import com.Transaction_Reward.Entity.Customer;
-import com.Transaction_Reward.Entity.Rewards;
-import com.Transaction_Reward.Exception.TransactionFailed;
-import com.Transaction_Reward.Service.CustomerServiceImpl;
+import com.TransactionReward.Entity.Customer;
+import com.TransactionReward.Entity.Rewards;
+import com.TransactionReward.Exception.TransactionFailed;
+import com.TransactionReward.Service.CustomerServiceImpl;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

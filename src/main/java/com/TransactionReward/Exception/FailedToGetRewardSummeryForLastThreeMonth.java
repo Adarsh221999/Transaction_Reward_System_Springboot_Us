@@ -1,4 +1,4 @@
-package com.Transaction_Reward.Exception;
+package com.TransactionReward.Exception;
 
 
 /*

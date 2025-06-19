@@ -1,7 +1,7 @@
 // ================================
 // GlobalExceptionHandler.java
 // ================================
-package com.Transaction_Reward.Exception;
+package com.TransactionReward.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

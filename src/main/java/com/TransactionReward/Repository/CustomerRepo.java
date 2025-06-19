@@ -1,6 +1,6 @@
-package com.Transaction_Reward.Repository;
+package com.TransactionReward.Repository;
 
-import com.Transaction_Reward.Entity.Customer;
+import com.TransactionReward.Entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerRepo extends JpaRepository<Customer,Long> {

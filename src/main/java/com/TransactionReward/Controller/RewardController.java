@@ -1,9 +1,9 @@
-package com.Transaction_Reward.Controller;
+package com.TransactionReward.Controller;
 
-import com.Transaction_Reward.Entity.Rewards;
-import com.Transaction_Reward.Exception.RewordTransactionNotFound;
-import com.Transaction_Reward.Models.RewardSummeryByCustomer;
-import com.Transaction_Reward.Service.RewardsServiceImpl;
+import com.TransactionReward.Entity.Rewards;
+import com.TransactionReward.Exception.RewordTransactionNotFound;
+import com.TransactionReward.Models.RewardSummeryByCustomer;
+import com.TransactionReward.Service.RewardsServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
