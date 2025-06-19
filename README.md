@@ -1,4 +1,4 @@
-# Transaction_Reward_System_Springboot_Us
+# TransactionRewardSystemSpringbootUs
 
 A Spring Boot application that provides APIs for managing and analyzing customer reward points based on transaction activity. This system allows tracking individual transactions, computing rewards, and generating summaries over specific time periods.
 
