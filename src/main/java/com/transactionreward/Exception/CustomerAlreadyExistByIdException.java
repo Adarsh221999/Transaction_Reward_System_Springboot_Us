@@ -1,4 +1,4 @@
-package com.TransactionReward.Exception;
+package com.transactionreward.Exception;
 
 public class CustomerAlreadyExistByIdException extends RuntimeException{
     public CustomerAlreadyExistByIdException(String message ) {

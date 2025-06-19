@@ -1,10 +1,10 @@
-package com.TransactionReward.Service;
+package com.transactionreward.Service;
 
-import com.TransactionReward.Entity.Rewards;
-import com.TransactionReward.Exception.*;
-import com.TransactionReward.Models.RewardSummeryByCustomer;
-import com.TransactionReward.Repository.CustomerRepo;
-import com.TransactionReward.Repository.RewardsRepo;
+import com.transactionreward.Entity.Rewards;
+import com.transactionreward.Exception.*;
+import com.transactionreward.Models.RewardSummeryByCustomer;
+import com.transactionreward.Repository.CustomerRepo;
+import com.transactionreward.Repository.RewardsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

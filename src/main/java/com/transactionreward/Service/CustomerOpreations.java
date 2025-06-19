@@ -1,6 +1,6 @@
-package com.TransactionReward.Service;
+package com.transactionreward.Service;
 
-import com.TransactionReward.Entity.Customer;
+import com.transactionreward.Entity.Customer;
 
 public interface CustomerOpreations {
 

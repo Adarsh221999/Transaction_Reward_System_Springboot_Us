@@ -1,8 +1,8 @@
-package com.TransactionReward;
-import com.TransactionReward.Controller.RewardController;
-import com.TransactionReward.Entity.Rewards;
-import com.TransactionReward.Models.RewardSummeryByCustomer;
-import com.TransactionReward.Service.RewardsServiceImpl;
+package com.transactionreward;
+import com.transactionreward.Controller.RewardController;
+import com.transactionreward.Entity.Rewards;
+import com.transactionreward.Models.RewardSummeryByCustomer;
+import com.transactionreward.Service.RewardsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

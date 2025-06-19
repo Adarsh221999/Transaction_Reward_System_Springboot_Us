@@ -1,9 +1,9 @@
-package com.TransactionReward;
+package com.transactionreward;
 
-import com.TransactionReward.Entity.Rewards;
-import com.TransactionReward.Models.RewardSummeryByCustomer;
-import com.TransactionReward.Repository.RewardsRepo;
-import com.TransactionReward.Service.RewardsServiceImpl;
+import com.transactionreward.Entity.Rewards;
+import com.transactionreward.Models.RewardSummeryByCustomer;
+import com.transactionreward.Repository.RewardsRepo;
+import com.transactionreward.Service.RewardsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

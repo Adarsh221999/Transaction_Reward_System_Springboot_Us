@@ -1,7 +1,7 @@
-package com.TransactionReward.Service;
+package com.transactionreward.Service;
 
-import com.TransactionReward.Entity.Rewards;
-import com.TransactionReward.Models.RewardSummeryByCustomer;
+import com.transactionreward.Entity.Rewards;
+import com.transactionreward.Models.RewardSummeryByCustomer;
 
 import java.time.LocalDate;
 import java.util.List;

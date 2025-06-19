@@ -1,4 +1,4 @@
-package com.TransactionReward;
+package com.transactionreward;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

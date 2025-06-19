@@ -1,6 +1,6 @@
-package com.TransactionReward.Repository;
+package com.transactionreward.Repository;
 
-import com.TransactionReward.Entity.Rewards;
+import com.transactionreward.Entity.Rewards;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

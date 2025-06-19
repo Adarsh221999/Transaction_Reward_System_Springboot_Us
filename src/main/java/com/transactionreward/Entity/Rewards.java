@@ -1,4 +1,4 @@
-package com.TransactionReward.Entity;
+package com.transactionreward.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
